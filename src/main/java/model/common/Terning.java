@@ -8,8 +8,8 @@ public class Terning {
 
 	
 	
-	public int trill(double seed) {
-		return (int) Math.ceil(((seed)*5)+1);
+	public void trill(double seed) {
+		this.verdi = (int) Math.floor(((seed)*6)+1);
 	}
 	
 	
