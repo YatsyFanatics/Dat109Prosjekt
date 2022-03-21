@@ -1,4 +1,4 @@
-package model.Common;
+package model.common;
 
 public class Yatzy {
 
