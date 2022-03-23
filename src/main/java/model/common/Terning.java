@@ -1,12 +1,13 @@
 package model.common;
 
-import java.util.Random;
-
 public class Terning {
 	private int verdi;
-	private boolean keep = false;
-
+	private boolean keep;
 	
+	public Terning() {
+		super();
+		this.keep = false;
+	}
 	
 	public void trill(double seed) {
 		this.verdi = (int) Math.floor(((seed)*6)+1);
