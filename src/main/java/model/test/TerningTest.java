@@ -1,7 +1,11 @@
 package model.test;
 
+
+
 import static org.junit.Assert.assertTrue;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
+
 import model.common.Terning;
 
 public class TerningTest {
