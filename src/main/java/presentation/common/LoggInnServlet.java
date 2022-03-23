@@ -8,13 +8,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import businessLogic.common.LoggInnUtil;
+import businessLogic.common.Validator;
+
 //import presentation.common.DeltagerDAO;
 
 @WebServlet("/logginn")
 public class LoggInnServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	//@EJB
-	//private DeltagerDAO deltagerDAO;
+	//private BrukerDAO brukerDAO;
        
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,7 +29,7 @@ public class LoggInnServlet extends HttpServlet {
         loginMessage = "Ugyldig brukernavn og/eller passord";
         
         }  else if (request.getParameter("invaliddeltager") != null) {
-        	loginMessage = "Deltager eksisterer ikke";
+        	loginMessage = "Bruker eksisterer ikke";
         } else if (request.getParameter("passwrong") != null) {
         	loginMessage = "Passord Stemmer ikke";
         }
@@ -37,19 +40,19 @@ public class LoggInnServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String passord = request.getParameter("passord");
-		String mobil = request.getParameter("mobil");
-	/*	
-		if (mobil == null && passord == null || !Validator.isValidMobil(mobil)) {
-			response.sendRedirect("logginn" + "?invalidinput");
-		} else {
-		Integer mob = Integer.parseInt(mobil);
-		Deltager x = deltagerDAO.hentDeltager(mob);
+		String epost = request.getParameter("e-post");
+		
+		if (epost == null && passord == null || !Validator.isValidEpost(epost)) {
+			response.sendRedirect("opprettspill");
+			//response.sendRedirect("logginn" + "?invalidinput");
+		} /*else {
+		//Bruker x = brukerDAO.hentBruker(epost);
 
 		  if( x == null ) { 
 			response.sendRedirect("logginn" + "?invaliddeltager");
 		} else if (Validator.finnPassord(x, passord)) {
 			LoggInnUtil.loggInn(request, x);
-			response.sendRedirect("deltagerListe");
+			response.sendRedirect("oprettspill");
 
 		} else { 
 			

@@ -5,6 +5,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-(landingside)
+<a href="http://localhost:8080/Dat109Yatzy/logginn"> logginnside</a>
 </body>
 </html>

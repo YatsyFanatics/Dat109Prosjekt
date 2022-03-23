@@ -17,15 +17,15 @@
 	
 	<form method="post">
 		<fieldset>
-			 	<label for="mobil">e-post:</label> <input type="text" placeholder="e-post" name="e-post" /><br>
+			 	<label for="epost">e-post:</label> <input type="text" placeholder="e-post" name="epost" /><br>
 				<label for="passord">Passord:</label> <input type="password" placeholder="Passord"
 					name="passord"  /><br>
 				<button type="submit">Logg inn</button>
 					</fieldset>
 	</form>
-	<form method="post">
+	<form method="get">
 		<fieldset>
-				<button type="submit">Opprett ny bruker</button>
+				<a href="http://localhost:8080/Dat109Yatzy/opprettbruker" ><button>Opprett bruker</button></a>
 					</fieldset>
 	</form>
 
