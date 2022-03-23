@@ -9,8 +9,9 @@ import org.junit.jupiter.api.Test;
 import model.common.Terning;
 
 public class TerningTest {
-	private double minRandomValue = 0.0; // random går fra og med 0.0
-	private double maxRandomValue = 0.9999; // random går opp til, men ikke med 1.0
+	// Math.random går fra og med 0.0 opptil men ikke inkludert 1
+	private double minRandomValue = 0.0; 
+	private double maxRandomValue = 0.9999; 
 	Terning terning = new Terning();
 	
 	
