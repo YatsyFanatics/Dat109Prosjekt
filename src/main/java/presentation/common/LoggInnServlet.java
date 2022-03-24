@@ -13,7 +13,7 @@ import businessLogic.common.Validator;
 
 //import presentation.common.DeltagerDAO;
 
-@WebServlet("/logginn")
+@WebServlet(name = "LoggInnServlet", urlPatterns ="/logginn")
 public class LoggInnServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	//@EJB
