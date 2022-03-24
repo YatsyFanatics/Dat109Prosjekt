@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import javax.ejb.EJB;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import businessLogic.common.BrukerDAO;
@@ -16,10 +17,12 @@ public class BrukerDAOTest {
 	@EJB
 	private BrukerDAO bDAO;
 	
-	@Test
-	public void testgetBruker() {
-		assertEquals(bDAO.getBruker("tester").getEtternavn(), "testesen");
-	}
+//	@BeforeEach
+//	public void setup() {
+//		bDAO = new BrukerDAO();
+//		Bruker b = new Bruker("tester2000", "teste2", "testesen2", "t.testesen2@gmail.com", "tester123");
+//		bDAO.nyBruker(b); //Lar meg ikke opprette nye brukere atm ???
+//	}
 	
 	@Test
 	public void testnyBruker() {
@@ -29,8 +32,13 @@ public class BrukerDAOTest {
 	}
 	
 	@Test
+	public void testgetBruker() {
+		assertEquals(bDAO.getBruker("tester2000").getEtternavn(), "testesen2");
+	}
+	
+	@Test
 	public void testerLedig() {
-		assertFalse(bDAO.erLedig("tester"));
+		assertFalse(bDAO.erLedig("tester2000"));
 	}
 	
 	@Test
