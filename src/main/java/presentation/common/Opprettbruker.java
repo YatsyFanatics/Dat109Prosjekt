@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Opprettbruker
  */
-@WebServlet("/opprettbruker")
+@WebServlet(name = "Opprettbruker", urlPatterns= "/opprettbruker")
 public class Opprettbruker extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -27,7 +27,7 @@ public class Opprettbruker extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("WEB-INF/opprettbruker.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/jsp/opprettbruker.jsp").forward(request, response);
 	}
 
 	/**

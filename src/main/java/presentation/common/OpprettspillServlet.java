@@ -27,7 +27,7 @@ public class OpprettspillServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("WEB-INF/opprettspill.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/jsp/opprettspill.jsp").forward(request, response);
 	}
 
 	/**

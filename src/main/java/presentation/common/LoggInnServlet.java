@@ -35,7 +35,7 @@ public class LoggInnServlet extends HttpServlet {
         }
 		
         request.setAttribute("loginMessage", loginMessage);
-		request.getRequestDispatcher("WEB-INF/logginn.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/jsp/logginn.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

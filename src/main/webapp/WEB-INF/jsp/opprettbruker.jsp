@@ -23,12 +23,12 @@
 				<label for="epost">e-post:</label> <input type="text" placeholder="e-post" name="epost" /><br>
 				<label for="passord">Passord:</label> <input type="password" placeholder="Passord" name="passord"  /><br>
 				<button type="submit">Logg inn</button>
-					</fieldset>
+		</fieldset>
 	</form>
 	<form method="post">
 		<fieldset>
 				<button type="submit">Opprett ny bruker</button>
-					</fieldset>
+		</fieldset>
 	</form>
 
 </body>

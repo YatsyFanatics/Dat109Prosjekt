@@ -18,7 +18,7 @@ public class LoggUtServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		LoggInnUtil.loggUt(request);
-		request.getRequestDispatcher("WEB-INF/index.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/jsp/index.jsp").forward(request, response);
 
 	}
 
