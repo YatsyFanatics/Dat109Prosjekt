@@ -15,8 +15,8 @@
 
     <form method="post">
         <fieldset>
-            <label for="epost">e-post:</label> <input type="text"
-                placeholder="e-post" name="epost" /><br> <label
+            <label for="brukernavn">Brukernavn:</label> <input type="text"
+                placeholder="brukernavn" name="brukernavn" /><br> <label
                 for="passord">Passord:</label> <input type="password"
                 placeholder="Passord" name="passord" /><br>
             <button type="submit">Logg inn</button>

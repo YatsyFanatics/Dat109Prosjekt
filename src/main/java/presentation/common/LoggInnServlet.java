@@ -8,27 +8,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import businessLogic.common.BrukerDAO;
 import businessLogic.common.LoggInnUtil;
 import businessLogic.common.Validator;
-
-//import presentation.common.DeltagerDAO;
+import model.common.Bruker;
 
 @WebServlet(name = "LoggInnServlet", urlPatterns ="/logginn")
 public class LoggInnServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	//@EJB
-	//private BrukerDAO brukerDAO;
+	@EJB
+	private BrukerDAO brukerDAO;
        
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		
 		String loginMessage = "";
 		
         if (request.getParameter("invalidinput") != null) {
         loginMessage = "Ugyldig brukernavn og/eller passord";
         
-        }  else if (request.getParameter("invaliddeltager") != null) {
+        }  else if (request.getParameter("invalidbruker") != null) {
         	loginMessage = "Bruker eksisterer ikke";
         } else if (request.getParameter("passwrong") != null) {
         	loginMessage = "Passord Stemmer ikke";
@@ -40,10 +39,26 @@ public class LoggInnServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String passord = request.getParameter("passord");
-		String epost = request.getParameter("e-post");
+		String brukernavn = request.getParameter("brukernavn");
 		
-		if (epost == null && passord == null || !Validator.isValidEpost(epost)) {
-			response.sendRedirect("opprettspill");
+		if(!brukerDAO.erLedig(brukernavn)) {
+			Bruker bruker = brukerDAO.getBruker(brukernavn);
+			if(true) {
+				//TODO passord validering ovenfor i if
+				request.getSession(true);
+				request.getSession(false).setAttribute("bruker", bruker);
+				response.sendRedirect("opprettspill"); //placeholder, burde sette opp en main/index jsp om vi skal følge wireframes
+			} else {
+				response.sendRedirect("passwrong");
+			}	
+		} else {
+			response.sendRedirect("invalidbruker");
+		}
+		
+		//Dunno ka som skjer under her TBH
+		
+//		if (epost == null && passord == null || !Validator.isValidEpost(epost)) {
+//			response.sendRedirect("opprettspill");
 			//response.sendRedirect("logginn" + "?invalidinput");
 		} /*else {
 		//Bruker x = brukerDAO.hentBruker(epost);
@@ -59,5 +74,5 @@ public class LoggInnServlet extends HttpServlet {
 			response.sendRedirect("logginn" + "?passwrong");
 		}
 	}*/
-	}
+//	}
 }

@@ -37,7 +37,7 @@ public class Opprettbruker extends HttpServlet {
 		b.setBrukernavn(request.getParameter("Brukernavn"));
 		b.setFornavn(request.getParameter("Fornavn"));
 		b.setEtternavn(request.getParameter("Etternavn"));
-		b.setEmail(request.getParameter("epost"));
+		b.setEpost(request.getParameter("epost"));
 		b.setPassord(request.getParameter("passord"));
 		bDAO.nyBruker(b);
 	}

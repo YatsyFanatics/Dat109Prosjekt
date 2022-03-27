@@ -12,18 +12,18 @@ public class Bruker {
 	private String brukernavn;
 	private String fornavn;
 	private String etternavn;
-	private String email;
+	private String epost;
 	private String passord; //forandres til object ref om vi tar i bruk en seperat Klasse for passord(om vi beholder denne, må salt string legges til)
 	
 	public Bruker() {
 		
 	}
 
-	public Bruker(String brukernavn, String fornavn, String etternavn, String email, String passord) {
+	public Bruker(String brukernavn, String fornavn, String etternavn, String epost, String passord) {
 		this.brukernavn = brukernavn;
 		this.fornavn = fornavn;
 		this.etternavn = etternavn;
-		this.email = email;
+		this.epost = epost;
 		this.passord = passord;
 	}
 
@@ -51,12 +51,12 @@ public class Bruker {
 		this.etternavn = etternavn;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getEpost() {
+		return epost;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEpost(String epost) {
+		this.epost = epost;
 	}
 
 	public String getPassord() {

@@ -9,12 +9,12 @@ create table bruker
     passord varchar not null,
     fornavn varchar not null,
     etternavn varchar not null,
-    email varchar not null,
+    epost varchar not null,
 
     constraint bruker_pk primary key (brukernavn)
 );
 
-insert into bruker(brukernavn, passord, fornavn, etternavn, email)
+insert into bruker(brukernavn, passord, fornavn, etternavn, epost)
 values ('tester', 'tester123', 'teste', 'testesen', 't.testesen@gmail.com');
 
 create table yatzyspill
