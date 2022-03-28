@@ -1,5 +1,6 @@
 package model.test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -10,9 +11,10 @@ import org.junit.jupiter.api.Test;
 import model.common.Poengtabell;
 
 public class TestPoengtabell {
-	Poengtabell tabellen = new Poengtabell();
+	Poengtabell tabellen = new Poengtabell(1);
 
-	@BeforeAll
+
+	@BeforeEach
 	public void init() {
 		int[] arr1 = { 1, 2, 6, 1, 1 };
 		tabellen.enere(0, arr1);
@@ -42,24 +44,22 @@ public class TestPoengtabell {
 		
 		int[] arr9 = { 2, 6, 2, 3, 2 };
 		tabellen.treLike(0, arr9);
+
 		
-		int[] arr10 = { 5, 6, 5, 5, 5 };
-		tabellen.treLike(0, arr10);
+		int[] arr10 = { 1, 2, 3, 4, 5 };
+		tabellen.litenStright(0, arr10);
 		
-		int[] arr11 = { 1, 2, 3, 4, 5 };
-		tabellen.litenStright(0, arr11);
+		int[] arr11 = { 6, 2, 3, 4, 5 };
+		tabellen.storStright(0, arr11);
 		
-		int[] arr12 = { 6, 2, 3, 4, 5 };
-		tabellen.storStright(0, arr12);
+		int[] arr12 = { 2, 2, 3, 4, 3 };
+		tabellen.hus(0, arr12);
 		
-		int[] arr13 = { 2, 2, 3, 4, 3 };
-		tabellen.hus(0, arr13);
+		int[] arr13 = { 3, 3, 4, 2, 6 };
+		tabellen.sjanse(0, arr13);
 		
-		int[] arr14 = { 3, 3, 4, 2, 6 };
-		tabellen.sjanse(0, arr14);
-		
-		int[] arr15 = { 1, 1, 1, 1, 1 };
-		tabellen.yatzy(0, arr15);
+		int[] arr14 = { 1, 1, 1, 1, 1 };
+		tabellen.yatzy(0, arr14);
 		
 		tabellen.total(0);
 
@@ -67,7 +67,6 @@ public class TestPoengtabell {
 
 	@Test
 	public void testEnere() {
-
 		assertEquals(3, tabellen.hentVerdi(0, 0));
 	}
 
@@ -112,54 +111,54 @@ public class TestPoengtabell {
 
 	@Test
 	public void testBonus50() {
-		assertEquals(50, tabellen.hentverdi(7, 0));
+		assertEquals(50, tabellen.hentVerdi(7, 0));
 
 	}
 
 
 	@Test
 	public void testEttPar() {
-		assertEquals(12, tabellen.hentverdi(8, 0));
+		assertEquals(12, tabellen.hentVerdi(8, 0));
 	}
 
 	@Test
 	public void testToPar() {
-		assertEquals(20, tabellen.hentverdi(9, 0));
+		assertEquals(20, tabellen.hentVerdi(9, 0));
 	}
 
 	@Test
 	public void testTreLike() {
-		assertEquals(6, tabellen.hentverdi(10, 0));
+		assertEquals(6, tabellen.hentVerdi(10, 0));
 	}
 
 	@Test
 	public void testFireLike() {
-		assertEquals(20, tabellen.hentverdi(11, 0));
+		assertEquals(20, tabellen.hentVerdi(11, 0));
 	}
 
 	@Test
 	public void testLitenStright() {
-		assertEquals(15, tabellen.hentverdi(12, 0));
+		assertEquals(15, tabellen.hentVerdi(12, 0));
 	}
 
 	@Test
 	public void testStorStright() {
-		assertEquals(20, tabellen.hentverdi(13, 0));
+		assertEquals(20, tabellen.hentVerdi(13, 0));
 	}
 
 	@Test
 	public void testHus() {
-		assertEquals(10, tabellen.hentverdi(14, 0));
+		assertEquals(10, tabellen.hentVerdi(14, 0));
 	}
 
 	@Test
 	public void testSjanse() {
-		assertEquals(18, tabellen.hentverdi(15, 0));
+		assertEquals(18, tabellen.hentVerdi(15, 0));
 	}
 
 	@Test
 	public void testYatzy() {
-		assertEquals(50, tabellen.hentverdi(16, 0));
+		assertEquals(50, tabellen.hentVerdi(16, 0));
 	}
 
 	@Test
