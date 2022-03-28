@@ -3,13 +3,13 @@ package businessLogic.common;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import presentation.common.Deltager;
+import model.common.Bruker;
 
 public class LoggInnUtil {
 	
 	public static boolean erInnlogget(HttpServletRequest request) {
 		HttpSession sesjon = request.getSession(false);
-		return sesjon != null && sesjon.getAttribute("deltager") != null;
+		return sesjon != null && sesjon.getAttribute("bruker") != null;
 	}
 	public static void loggUt(HttpServletRequest request) {
 		HttpSession sesjon = request.getSession(false);
@@ -18,11 +18,11 @@ public class LoggInnUtil {
 		}
 	}
 
-	public static void loggInn(HttpServletRequest request, Deltager deltager) {
+	public static void loggInn(HttpServletRequest request, Bruker bruker) {
 		loggUt(request);
 
 		HttpSession sesjon = request.getSession(true);
-		sesjon.setAttribute("deltager", deltager);
+		sesjon.setAttribute("bruker", bruker);
 	}
 	
 }
