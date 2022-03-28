@@ -33,6 +33,9 @@ public class Opprettbruker extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//ingen sjekk først om brukernavn/epost allerede eksisterer?
+		
 		Bruker b = new Bruker();
 		b.setBrukernavn(request.getParameter("Brukernavn"));
 		b.setFornavn(request.getParameter("Fornavn"));

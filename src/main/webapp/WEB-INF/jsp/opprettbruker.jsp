@@ -22,7 +22,8 @@
 				<label for="Etternavn">Etternavn:</label> <input type="text" placeholder="Etternavn" name="Etternavn" /><br>
 				<label for="epost">e-post:</label> <input type="text" placeholder="e-post" name="epost" /><br>
 				<label for="passord">Passord:</label> <input type="password" placeholder="Passord" name="passord"  /><br>
-				<button type="submit">Logg inn</button>
+                <label for="passord">Passord:</label> <input type="password" placeholder="PassordRepetert" name="passordrepetert"  /><br>
+				<button type="submit">Opprett ny bruker</button>
 		</fieldset>
 	</form>
 	<form method="post">
