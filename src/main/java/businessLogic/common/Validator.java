@@ -1,8 +1,8 @@
 package businessLogic.common;
 
-import no.hvl.dat108.Passord;
-import no.hvl.dat108.PassordUtil;
-import presentation.common.Deltager;
+//import no.hvl.dat108.Passord;
+//import no.hvl.dat108.PassordUtil;
+import model.common.Bruker;
 
 public class Validator {
 
@@ -21,8 +21,9 @@ public class Validator {
 
 	  
 	    public static boolean isValidEpost(String epost) {
-	        return epost != null;
-	        		//&& epost.matches("^" + ANY_DIGIT + EIGHT_TIMES + "$");
+	        return epost != null
+	        		//source https://howtodoinjava.com/java/regex/java-regex-validate-email-address/
+	        		&& epost.matches("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$");
 	    }
 	    
 	    public static boolean isValidFornavn(String fornavn) {
@@ -62,20 +63,21 @@ public class Validator {
 	        		&& (kjonn.equals("mann") || kjonn.equals("kvinne"));
 	        	    }
 		
+		//må endrest til sån vi kjem til å handtere passord og slit
 		
-		public static boolean finnPassord(Deltager x, String passord) {
-			boolean ok = false;
-			Passord dp = x.getPassord();
-			String salt = dp.getSalt();
-			String hash = dp.getHash();
-			String nyhash = PassordUtil.hashMedSalt(passord, salt);
-			
-			if (hash.equals(nyhash)) {
-				ok = true;
-			} else {
-			
-			ok = false;
-			}
-			return ok;
-		}
+//		public static boolean finnPassord(Bruker x, String passord) {
+//			boolean ok = false;
+//			Passord dp = x.getPassord();
+//			String salt = dp.getSalt();
+//			String hash = dp.getHash();
+//			String nyhash = PassordUtil.hashMedSalt(passord, salt);
+//			
+//			if (hash.equals(nyhash)) {
+//				ok = true;
+//			} else {
+//			
+//			ok = false;
+//			}
+//			return ok;
+//		}
 }
