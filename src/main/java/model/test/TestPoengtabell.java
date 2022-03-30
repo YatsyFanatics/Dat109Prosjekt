@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import model.Poengtabell;
 
 public class TestPoengtabell {
-	Poengtabell tabellen = new Poengtabell(1);
+	Poengtabell tabellen = new Poengtabell();
 
 
 	@BeforeEach
@@ -44,22 +44,24 @@ public class TestPoengtabell {
 		
 		int[] arr9 = { 2, 6, 2, 3, 2 };
 		tabellen.treLike(0, arr9);
-
 		
-		int[] arr10 = { 1, 2, 3, 4, 5 };
-		tabellen.litenStright(0, arr10);
+		int[] arr10 = { 6, 6, 6, 3, 6 };
+		tabellen.fireLike(0, arr10);
 		
-		int[] arr11 = { 6, 2, 3, 4, 5 };
-		tabellen.storStright(0, arr11);
+		int[] arr11 = { 1, 2, 3, 4, 5 };
+		tabellen.litenStright(0, arr11);
 		
-		int[] arr12 = { 2, 2, 3, 4, 3 };
-		tabellen.hus(0, arr12);
+		int[] arr12 = { 6, 2, 3, 4, 5 };
+		tabellen.storStright(0, arr12);
 		
-		int[] arr13 = { 3, 3, 4, 2, 6 };
-		tabellen.sjanse(0, arr13);
+		int[] arr13 = { 2, 2, 3, 3, 3 };
+		tabellen.hus(0, arr13);
 		
-		int[] arr14 = { 1, 1, 1, 1, 1 };
-		tabellen.yatzy(0, arr14);
+		int[] arr14 = { 3, 3, 4, 2, 6 };
+		tabellen.sjanse(0, arr14);
+		
+		int[] arr15 = { 1, 1, 1, 1, 1 };
+		tabellen.yatzy(0, arr15);
 		
 		tabellen.total(0);
 
@@ -133,7 +135,7 @@ public class TestPoengtabell {
 
 	@Test
 	public void testFireLike() {
-		assertEquals(20, tabellen.hentVerdi(11, 0));
+		assertEquals(24, tabellen.hentVerdi(11, 0));
 	}
 
 	@Test
@@ -148,7 +150,7 @@ public class TestPoengtabell {
 
 	@Test
 	public void testHus() {
-		assertEquals(10, tabellen.hentVerdi(14, 0));
+		assertEquals(13, tabellen.hentVerdi(14, 0));
 	}
 
 	@Test
@@ -167,6 +169,13 @@ public class TestPoengtabell {
 		+ tabellen.hentVerdi(9, 0) + tabellen.hentVerdi(10, 0) + tabellen.hentVerdi(11, 0)+ tabellen.hentVerdi(12, 0)
 		+ tabellen.hentVerdi(13, 0) + tabellen.hentVerdi(14, 0) + tabellen.hentVerdi(15, 0)+ tabellen.hentVerdi(16, 0);
 
+		assertEquals(total, tabellen.hentVerdi(17, 0));
+	}
+	
+	@Test
+	public void testHentRad() {
+		int[] arrEnere = {tabellen.hentVerdi(0, 0),0,0,0,0,0};
+		assertEquals(arrEnere[0], tabellen.hentRad(0)[0]);
 	}
 
 }

@@ -8,8 +8,11 @@ public class Poengtabell {
 
 	int[][] yatzyTabell;
 
+	public Poengtabell() {
+		yatzyTabell = new int[18][6];
+	}
 	public Poengtabell(int antallSpillere) {
-		yatzyTabell = new int[17][antallSpillere];
+		yatzyTabell = new int[18][antallSpillere];
 	}
 
 	public void regnUt(int spillerNr, int radNr, int[] arr) {
@@ -107,7 +110,7 @@ public class Poengtabell {
 	public void sum(int spillerNr) {
 		int sum = 0;
 
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i <= 5; i++) {
 			sum += hentVerdi(i, spillerNr);
 		}
 		settInn(6, spillerNr, sum);
@@ -122,7 +125,7 @@ public class Poengtabell {
 
 	public void ettPar(int spillerNr, int[] arr) {
 		int sum = 0;
-		for (int i = 0; i < 7; i++) {
+		for (int i = 1; i <= 6; i++) {
 			if (antallLike(i, arr) > 1) {
 				sum = i * 2;
 			}
@@ -132,42 +135,145 @@ public class Poengtabell {
 	}
 
 	public void toPar(int spillerNr, int[] arr) {
-		// TODO Auto-generated method stub
+		int sum = 0;
+		int par1 = 0;
+		boolean toPar = false;
+		for (int i = 1; i <= 6; i++) {
+			if (antallLike(i, arr) > 1) {
+				sum = i * 2;
+				par1 = i;
+			}
 
+		}
+		for (int i = 1; i <= 6; i++) {
+			if (antallLike(i, arr) > 1 && i != par1) {
+				sum += i * 2;
+				toPar = true;
+			}
+
+		}
+		if (toPar) {
+			settInn(9, spillerNr, sum);
+		}
 	}
 
 	public void treLike(int spillerNr, int[] arr) {
-		// TODO Auto-generated method stub
+		int sum = 0;
+		for (int i = 1; i <= 6; i++) {
+			if (antallLike(i, arr) > 2) {
+				sum = i * 3;
+			}
+
+		}
+		settInn(10, spillerNr, sum);
 
 	}
+	
+	public void fireLike(int spillerNr, int[] arr) {
+		int sum = 0;
+		for (int i = 1; i <= 6; i++) {
+			if (antallLike(i, arr) > 3) {
+				sum = i * 4;
+			}
+
+		}
+		settInn(11, spillerNr, sum);
+
+	}
+	
 
 	public void litenStright(int spillerNr, int[] arr) {
-		// TODO Auto-generated method stub
+		int sum = 0;
+		boolean funnet = false;
+		for (int i = 1; i <= 5; i++) {
+			for (int n = 1; n <= 5 && !funnet; n++) {
+				if (i == n) {
+					sum += n;
+					funnet = true;
+				}
+			}
+			funnet = false;
+		}
+		if (sum == (1 + 2 + 3 + 4 + 5)) {
+			settInn(12, spillerNr, sum);
+		} else {
+			settInn(12, spillerNr, 0);
+		}
 
 	}
 
 	public void storStright(int spillerNr, int[] arr) {
-		// TODO Auto-generated method stub
+		int sum = 0;
+		boolean funnet = false;
+		for (int i = 2; i <= 6; i++) {
+			for (int n = 2; n <= 6 && !funnet; n++) {
+				if (i == n) {
+					sum += i;
+					funnet = true;
+				}
+			}
+			funnet = false;
+		}
+		if (sum == (2 + 3 + 4 + 5 + 6)) {
+			settInn(13, spillerNr, sum);
+		} else {
+			settInn(13, spillerNr, 0);
+		}
+
 	}
 
 	public void hus(int spillerNr, int[] arr) {
-		// TODO Auto-generated method stub
+		int sum = 0;
+		int treLike = 0;
+		boolean hus = false;
+
+		for (int i = 1; i <= 6; i++) {
+			if (antallLike(i, arr) > 2) {
+				sum = i * 3;
+				treLike = i;
+			}
+
+		}
+
+		if (treLike > 0) {
+			for (int i = 1; i <= 6; i++) {
+				if (antallLike(i, arr) > 1 && i != treLike) {
+					sum += i * 2;
+					hus = true;
+				}
+
+			}
+		}
+
+		if (hus) {
+			settInn(14, spillerNr, sum);
+		} else {
+			settInn(14, spillerNr, 0);
+		}
 
 	}
 
 	public void sjanse(int spillerNr, int[] arr) {
-		// TODO Auto-generated method stub
+		int sum = 0;
+		for(int  i = 0; i <5; i++) {
+			sum += arr[i];
+		}
+		settInn(15, spillerNr, sum);
 
 	}
 
 	public void yatzy(int spillerNr, int[] arr) {
-		// TODO Auto-generated method stub
-
+		settInn(16, spillerNr, yatzyPoeng);
 	}
 
 	public void total(int spillerNr) {
-		// TODO Auto-generated method stub
 
+		int sum = 0;
+
+		for (int i = 6; i <= 16; i++) {
+			sum += hentVerdi(i, spillerNr);
+		}
+		settInn(17, spillerNr, sum);
 	}
 
 	private int sumTerningVerdi(int verdi, int[] arr) {
@@ -196,6 +302,10 @@ public class Poengtabell {
 			}
 		}
 		return antallForekomster;
+	}
+	
+	public int[] hentRad(int i) {
+		return yatzyTabell[i];
 	}
 
 }
