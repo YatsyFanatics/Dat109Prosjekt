@@ -2,9 +2,9 @@ package model.common;
 
 public class Poengtabell {
 
-	public static int bonusGrense = 42;
-	public static int bonusPoeng = 50;
-	public static int yatzyPoeng = 50;
+	public final static int bonusGrense = 42;
+	public final static int bonusPoeng = 50;
+	public final static int yatzyPoeng = 50;
 
 	int[][] yatzyTabell;
 
