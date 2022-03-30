@@ -10,18 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class SpillYatzyServlet
  */
-@WebServlet("/spillyatzy")
+@WebServlet(name = "SpillYatzyController", urlPatterns = "/spillyatzy")
 public class SpillYatzyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public SpillYatzyController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
