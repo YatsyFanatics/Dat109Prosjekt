@@ -47,7 +47,7 @@ public class LoggInnController extends HttpServlet {
 				//TODO passord validering ovenfor i if
 				request.getSession(true);
 				request.getSession(false).setAttribute("bruker", bruker);
-				response.sendRedirect("opprettspill"); //placeholder, burde sette opp en main/index jsp om vi skal følge wireframes
+				response.sendRedirect("opprettspill"); //placeholder, burde sette opp en main/index jsp om vi skal fï¿½lge wireframes
 			} else {
 				response.sendRedirect("passwrong");
 			}	
@@ -58,7 +58,6 @@ public class LoggInnController extends HttpServlet {
 		//Dunno ka som skjer under her TBH
 		
 //		if (epost == null && passord == null || !Validator.isValidEpost(epost)) {
-//			response.sendRedirect("opprettspill");
 			//response.sendRedirect("logginn" + "?invalidinput");
 		} /*else {
 		//Bruker x = brukerDAO.hentBruker(epost);
