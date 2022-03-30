@@ -1,4 +1,4 @@
-package model.common;
+package model;
 
 public class Poengtabell {
 

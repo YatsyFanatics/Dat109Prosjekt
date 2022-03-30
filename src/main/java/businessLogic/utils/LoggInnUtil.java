@@ -1,9 +1,9 @@
-package businessLogic.common;
+package businessLogic.utils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import model.common.Bruker;
+import model.Bruker;
 
 public class LoggInnUtil {
 	

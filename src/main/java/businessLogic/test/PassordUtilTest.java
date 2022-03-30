@@ -8,7 +8,7 @@ import java.security.spec.InvalidKeySpecException;
 
 import org.junit.jupiter.api.Test;
 
-import businessLogic.common.PassordUtil;
+import businessLogic.utils.PassordUtil;
 
 public class PassordUtilTest {
 	PassordUtil passUtil = new PassordUtil();

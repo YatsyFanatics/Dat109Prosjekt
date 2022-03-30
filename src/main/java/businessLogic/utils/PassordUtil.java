@@ -1,4 +1,4 @@
-package businessLogic.common;
+package businessLogic.utils;
 
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
@@ -8,7 +8,7 @@ import java.security.spec.InvalidKeySpecException;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
-public class PassordUtils {
+public class PassordUtil {
 	
 	/**
 	 * For hashing av passord, salt og hash lagres på samme string

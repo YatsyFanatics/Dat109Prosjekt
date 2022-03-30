@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
-import model.common.Terning;
+import model.Terning;
 
 public class TerningTest {
 	// Math.random går fra og med 0.0 opptil men ikke inkludert 1

@@ -1,4 +1,4 @@
-package presentation.common;
+package presentation.connection;
 import java.io.IOException;
 
 import javax.ejb.EJB;
@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import businessLogic.common.BrukerDAO;
-import businessLogic.common.LoggInnUtil;
-import businessLogic.common.Validator;
-import model.common.Bruker;
+import businessLogic.dao.BrukerDAO;
+import businessLogic.utils.LoggInnUtil;
+import businessLogic.utils.Validator;
+import model.Bruker;
 
 @WebServlet(name = "LoggInnServlet", urlPatterns ="/logginn")
-public class LoggInnServlet extends HttpServlet {
+public class LoggInnController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@EJB
 	private BrukerDAO brukerDAO;

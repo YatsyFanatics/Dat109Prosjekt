@@ -1,8 +1,6 @@
-package businessLogic.common;
+package businessLogic.utils;
 
-//import no.hvl.dat108.Passord;
-//import no.hvl.dat108.PassordUtil;
-import model.common.Bruker;
+import model.Bruker;
 
 public class Validator {
 

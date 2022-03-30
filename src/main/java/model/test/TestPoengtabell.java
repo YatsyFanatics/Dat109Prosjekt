@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import model.common.Poengtabell;
+import model.Poengtabell;
 
 public class TestPoengtabell {
 	Poengtabell tabellen = new Poengtabell(1);

@@ -1,10 +1,10 @@
-package businessLogic.common;
+package businessLogic.dao;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import model.common.Bruker;
+import model.Bruker;
 
 @Stateless
 public class BrukerDAO {

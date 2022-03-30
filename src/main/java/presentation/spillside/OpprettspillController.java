@@ -1,4 +1,4 @@
-package presentation.common;
+package presentation.spillside;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,26 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class IndexServlet
+ * Servlet implementation class Opprettspill
  */
-@WebServlet("/index")
-public class IndexServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public IndexServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+@WebServlet(name = "OpprettspillServlet", urlPatterns = "/opprettspill")
+public class OpprettspillController extends HttpServlet {
+	private static final long serialVersionUID = 1L;    
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO if innlogget -> index_in else index_ut
-		request.getRequestDispatcher("WEB-INF/jsp/index_ut.jsp").forward(request, response);
+		// TODO Auto-generated method stub
+		request.getRequestDispatcher("WEB-INF/jsp/opprettspill.jsp").forward(request, response);
 	}
 
 	/**
@@ -35,7 +27,7 @@ public class IndexServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		response.sendRedirect("spillyatzy");
 	}
 
 }
