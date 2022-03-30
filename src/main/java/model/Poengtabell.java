@@ -46,7 +46,11 @@ public class Poengtabell {
 		case 6:
 			sum(spillerNr);
 			break;
-
+			
+//		case 7:
+//			bonus();
+//			break;
+			
 		case 8:
 			ettPar(spillerNr, arr);
 			break;
