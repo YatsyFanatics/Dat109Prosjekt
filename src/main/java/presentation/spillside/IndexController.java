@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import businessLogic.dao.BrukerDAO;
+import model.Bruker;
+
 /**
  * Servlet implementation class IndexServlet
  */
@@ -26,6 +29,8 @@ public class IndexController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 		// TODO if innlogget -> index_in else index_ut
 		request.getRequestDispatcher("WEB-INF/jsp/index_ut.jsp").forward(request, response);
 	}
@@ -34,8 +39,13 @@ public class IndexController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		if (session.getAttribute("user") == null) {
+		    response.sendRedirect(request.getContectPath() + "/index_ut"); // Not logged in, redirect to index ut page.
+		} else {
+		    chain.doFilter(request, response); // Logged in, just continue chain.
+		}
+		
 	}
 
 }
