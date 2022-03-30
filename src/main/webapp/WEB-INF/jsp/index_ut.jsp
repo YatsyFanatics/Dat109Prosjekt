@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h2>Yatzy Fanatics</h2>
-	<a href="Opprettbruker"><button>Opprett bruker</button></a><br>
+	<a href="opprettbruker"><button>Opprett bruker</button></a><br>
     <a href="logginn"><button>Logg inn</button></a>
 </body>
 </html>

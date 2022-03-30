@@ -8,7 +8,7 @@
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <jta-data-source>DAT109DataSource</jta-data-source>
         
-        <class>model.common.Bruker</class>
+        <class>model.Bruker</class>
         
         <properties>
             <property name="eclipselink.weaving" value="false" />
