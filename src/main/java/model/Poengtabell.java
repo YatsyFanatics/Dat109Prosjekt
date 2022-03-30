@@ -11,6 +11,7 @@ public class Poengtabell {
 	public Poengtabell() {
 		yatzyTabell = new int[18][6];
 	}
+
 	public Poengtabell(int antallSpillere) {
 		yatzyTabell = new int[18][antallSpillere];
 	}
@@ -57,7 +58,7 @@ public class Poengtabell {
 		case 10:
 			treLike(spillerNr, arr);
 			break;
-			
+
 		case 11:
 			fireLike(spillerNr, arr);
 			break;
@@ -69,21 +70,24 @@ public class Poengtabell {
 		case 13:
 			storStright(spillerNr, arr);
 			break;
-			
+
 		case 14:
 			hus(spillerNr, arr);
 			break;
-			
+
 		case 15:
 			sjanse(spillerNr, arr);
 			break;
 
 		case 16:
-			yatzy(spillerNr); //yatzy forutsetter sjekk gjort i spill klassen, kan diskuteres
+			yatzy(spillerNr); // yatzy forutsetter sjekk gjort i spill klassen, kan diskuteres
 			break;
 
 		case 17:
 			total(spillerNr);
+			break;
+
+		default:
 			break;
 		}
 
@@ -180,7 +184,7 @@ public class Poengtabell {
 		settInn(10, spillerNr, sum);
 
 	}
-	
+
 	public void fireLike(int spillerNr, int[] arr) {
 		int sum = 0;
 		for (int i = 1; i <= 6; i++) {
@@ -192,7 +196,6 @@ public class Poengtabell {
 		settInn(11, spillerNr, sum);
 
 	}
-	
 
 	public void litenStright(int spillerNr, int[] arr) {
 		int sum = 0;
@@ -267,7 +270,7 @@ public class Poengtabell {
 
 	public void sjanse(int spillerNr, int[] arr) {
 		int sum = 0;
-		for(int  i = 0; i <5; i++) {
+		for (int i = 0; i < 5; i++) {
 			sum += arr[i];
 		}
 		settInn(15, spillerNr, sum);
@@ -315,7 +318,7 @@ public class Poengtabell {
 		}
 		return antallForekomster;
 	}
-	
+
 	public int[] hentRad(int i) {
 		return yatzyTabell[i];
 	}

@@ -112,7 +112,7 @@ public class TestPoengtabell {
 
 	@Test
 	public void testBonus50() {
-		assertEquals(50, tabellen.hentVerdi(7, 0));
+		assertEquals(Poengtabell.bonusPoeng, tabellen.hentVerdi(7, 0));
 
 	}
 
