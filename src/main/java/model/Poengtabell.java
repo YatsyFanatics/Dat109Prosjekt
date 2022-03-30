@@ -18,31 +18,31 @@ public class Poengtabell {
 	public void regnUt(int spillerNr, int radNr, int[] arr) {
 
 		switch (radNr) {
-		case 1:
+		case 0:
 			enere(spillerNr, arr);
 			break;
 
-		case 2:
+		case 1:
 			toere(spillerNr, arr);
 			break;
 
-		case 3:
+		case 2:
 			treere(spillerNr, arr);
 			break;
 
-		case 4:
+		case 3:
 			firere(spillerNr, arr);
 			break;
 
-		case 5:
+		case 4:
 			femere(spillerNr, arr);
 			break;
 
-		case 6:
+		case 5:
 			seksere(spillerNr, arr);
 			break;
 
-		case 7:
+		case 6:
 			sum(spillerNr);
 			break;
 
@@ -57,20 +57,32 @@ public class Poengtabell {
 		case 10:
 			treLike(spillerNr, arr);
 			break;
-
+			
 		case 11:
-			litenStright(spillerNr, arr);
+			fireLike(spillerNr, arr);
 			break;
 
 		case 12:
-			storStright(spillerNr, arr);
+			litenStright(spillerNr, arr);
 			break;
 
 		case 13:
-			yatzy(spillerNr, arr);
+			storStright(spillerNr, arr);
+			break;
+			
+		case 14:
+			hus(spillerNr, arr);
+			break;
+			
+		case 15:
+			sjanse(spillerNr, arr);
 			break;
 
-		case 14:
+		case 16:
+			yatzy(spillerNr); //yatzy forutsetter sjekk gjort i spill klassen, kan diskuteres
+			break;
+
+		case 17:
 			total(spillerNr);
 			break;
 		}
@@ -262,7 +274,7 @@ public class Poengtabell {
 
 	}
 
-	public void yatzy(int spillerNr, int[] arr) {
+	public void yatzy(int spillerNr) {
 		settInn(16, spillerNr, yatzyPoeng);
 	}
 

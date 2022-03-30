@@ -60,8 +60,7 @@ public class TestPoengtabell {
 		int[] arr14 = { 3, 3, 4, 2, 6 };
 		tabellen.sjanse(0, arr14);
 		
-		int[] arr15 = { 1, 1, 1, 1, 1 };
-		tabellen.yatzy(0, arr15);
+		tabellen.yatzy(0);
 		
 		tabellen.total(0);
 
