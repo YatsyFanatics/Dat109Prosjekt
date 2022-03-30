@@ -26,8 +26,8 @@ public class IndexServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher("WEB-INF/jsp/index.jsp").forward(request, response);
+		// TODO if innlogget -> index_in else index_ut
+		request.getRequestDispatcher("WEB-INF/jsp/index_ut.jsp").forward(request, response);
 	}
 
 	/**

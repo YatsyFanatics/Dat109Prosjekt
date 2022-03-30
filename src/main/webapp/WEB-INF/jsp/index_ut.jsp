@@ -5,10 +5,11 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Yatzy Fanatics</title>
 </head>
 <body>
-	<a href="Opprettspill"><button>Opprett spill</button></a>
+	<h2>Yatzy Fanatics</h2>
+	<a href="Opprettbruker"><button>Opprett bruker</button></a><br>
     <a href="logginn"><button>Logg inn</button></a>
 </body>
 </html>
