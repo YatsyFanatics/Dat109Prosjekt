@@ -16,7 +16,7 @@ public class PassordUtilTest {
 	@Test
 	public void basicPassordTest() throws NoSuchAlgorithmException, InvalidKeySpecException {
 		String pass = "passord123";
-		String hash = passUtil.generateStorngPasswordHash(pass);
+		String hash = passUtil.generateStrongPasswordHash(pass);
 		Boolean validated = PassordUtil.validatePassword(pass, hash);
 		assertTrue(validated);
 	}
@@ -24,7 +24,7 @@ public class PassordUtilTest {
 	@Test
 	public void feilPassordTest() throws NoSuchAlgorithmException, InvalidKeySpecException {
 		String pass = "correcthorsebatterystaple";
-		String hash = passUtil.generateStorngPasswordHash(pass);
+		String hash = passUtil.generateStrongPasswordHash(pass);
 		Boolean validated = PassordUtil.validatePassword("passord123", hash);
 		assertFalse(validated);
 	}
