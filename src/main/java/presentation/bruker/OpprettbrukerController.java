@@ -16,7 +16,7 @@ import model.Bruker;
 import businessLogic.utils.LoggInnUtil;
 import businessLogic.utils.PassordUtil;
 import businessLogic.utils.Validator;
-
+import businessLogic.utils.PassordUtil;
 /**
  * Servlet implementation class Opprettbruker
  */
@@ -28,7 +28,7 @@ public class OpprettbrukerController extends HttpServlet {
 	String fornavn;
 	String etternavn;
 	String epost;
-	String passordForst;
+	String passordPlain;
 	String passordRepetert;
 	StringBuilder feilmelding;
 
@@ -98,13 +98,13 @@ public class OpprettbrukerController extends HttpServlet {
 			sesjon.setAttribute("Etternavn", etternavn);
 		}
 
-		passordForst = request.getParameter("passord");
-		if (!Validator.isValidPassordForst(passordForst)) {
+		passordPlain = request.getParameter("passord");
+		if (!Validator.isValidPassordForst(passordPlain)) {
 			feilmelding.append("&passordForstIn=feil");
 		}
 
 		passordRepetert = request.getParameter("passordRepetert");
-		if (!Validator.isValidPassordRepetert(passordRepetert, passordForst)) {
+		if (!Validator.isValidPassordRepetert(passordRepetert, passordPlain)) {
 			feilmelding.append("&passordRepetertIn=feil");
 		}
 
@@ -118,13 +118,17 @@ public class OpprettbrukerController extends HttpServlet {
 //			} catch (Exception e) {
 //				feilmelding.append("&passord-generering=feilet-prov-paa-nytt");
 //			}
-			Bruker nyBruker = new Bruker(brukernavn, fornavn, etternavn, epost, passordForst);
+			
+			String passordSikkert = hashAndSaltPassword(passordPlain);
+			
+			Bruker nyBruker = new Bruker(brukernavn, fornavn, etternavn, epost, passordSikkert);
 
 			synchronized (this) {
 				bDAO.nyBruker(nyBruker);
 			}
-			sesjon.invalidate();
-			LoggInnUtil.loggInn(request, nyBruker);
+			
+//			sesjon.invalidate();
+//			LoggInnUtil.loggInn(request, nyBruker);
 			response.sendRedirect("opprettspill");
 		} else {
 			feilmelding.replace(0, 1, "?");
@@ -134,4 +138,12 @@ public class OpprettbrukerController extends HttpServlet {
 
 	}
 
+	private String hashAndSaltPassword(String passord) {
+		try {
+			return PassordUtil.generateStrongPasswordHash(passord);
+		} catch (NoSuchAlgorithmException | InvalidKeySpecException ignore) { 
+			return null;
+		}
+	}
+	
 }
