@@ -20,9 +20,17 @@ public class Validator {
 	  
 	    public static boolean isValidEpost(String epost) {
 	        return epost != null
-	        		//source https://howtodoinjava.com/java/regex/java-regex-validate-email-address/
-	        		&& epost.matches("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$");
+	        		//source https://www.baeldung.com/java-email-validation-regex
+	        		//nummer 6
+	        		&& epost.matches("^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
 	    }
+	    
+	    public static boolean isValidBrukernavn(String brukernavn) {
+	        return brukernavn != null 
+	        		&& brukernavn.matches("^" + ANY_CAPITAL_LETTER
+	                + ANY_LETTER_SPACE_OR_HYPHEN + TWO_TO_TWNTY_TIMES + "$");
+	    }
+	    
 	    
 	    public static boolean isValidFornavn(String fornavn) {
 	        return fornavn != null 
@@ -54,12 +62,6 @@ public class Validator {
 			return passordRepetert.equals(passordForst);
 		}
 
-
-		public static boolean isValidKjonn(String kjonn) {
-
-	        return kjonn != null 
-	        		&& (kjonn.equals("mann") || kjonn.equals("kvinne"));
-	        	    }
 		
 		//må endrest til sån vi kjem til å handtere passord og slit
 		

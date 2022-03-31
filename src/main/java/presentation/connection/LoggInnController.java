@@ -1,5 +1,7 @@
 package presentation.connection;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -10,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import businessLogic.dao.BrukerDAO;
 import businessLogic.utils.LoggInnUtil;
-import businessLogic.utils.Validator;
+import businessLogic.utils.PassordUtil;
 import model.Bruker;
 
 @WebServlet(name = "LoggInnServlet", urlPatterns ="/logginn")
@@ -18,61 +20,57 @@ public class LoggInnController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	@EJB
 	private BrukerDAO brukerDAO;
+	String loginMessage = "";
        
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String loginMessage = "";
-		
-        if (request.getParameter("invalidinput") != null) {
-        loginMessage = "Ugyldig brukernavn og/eller passord";
-        
-        }  else if (request.getParameter("invalidbruker") != null) {
-        	loginMessage = "Bruker eksisterer ikke";
-        } else if (request.getParameter("passwrong") != null) {
-        	loginMessage = "Passord Stemmer ikke";
-        }
-		
-        request.setAttribute("loginMessage", loginMessage);
+		// TODO check if already logged inn
+		if (LoggInnUtil.erInnlogget(request)) {
+			
+		}
+		request.setAttribute("loginMessage", loginMessage);
+		loginMessage = "";
 		request.getRequestDispatcher("WEB-INF/jsp/logginn.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String passord = request.getParameter("passord");
+
+		String password = request.getParameter("passord");
 		String brukernavn = request.getParameter("brukernavn");
-		
-		if(!brukerDAO.erLedig(brukernavn)) {
-			Bruker bruker = brukerDAO.getBruker(brukernavn);
-			if(true) {
-				//TODO passord validering ovenfor i if
-				request.getSession(true);
-				request.getSession(false).setAttribute("bruker", bruker);
-				response.sendRedirect("opprettspill"); //placeholder, burde sette opp en main/index jsp om vi skal følge wireframes
+		Bruker bruker = brukerDAO.getBruker(brukernavn);
+
+		// TODO sanitize input
+
+		if (hasUser(bruker)) {
+			String hash = bruker.getPassord();
+
+			if(correctPass(password, hash)) {
+				
+				// request.getSession(true);
+				// request.getSession(false).setAttribute("bruker", bruker);
+				
+				LoggInnUtil.loggInn(request, bruker);
+				//placeholder, burde sette opp en main/index jsp om vi skal fï¿½lge wireframes
+				response.sendRedirect("opprettspill");
 			} else {
-				response.sendRedirect("passwrong");
+				this.loginMessage = "Passord Stemmer ikke";
+				doGet(request, response);
 			}	
 		} else {
-			response.sendRedirect("invalidbruker");
+			this.loginMessage = "Bruker eksisterer ikke";
+			doGet(request, response);
 		}
-		
-		//Dunno ka som skjer under her TBH
-		
-//		if (epost == null && passord == null || !Validator.isValidEpost(epost)) {
-//			response.sendRedirect("opprettspill");
-			//response.sendRedirect("logginn" + "?invalidinput");
-		} /*else {
-		//Bruker x = brukerDAO.hentBruker(epost);
+	} 
 
-		  if( x == null ) { 
-			response.sendRedirect("logginn" + "?invaliddeltager");
-		} else if (Validator.finnPassord(x, passord)) {
-			LoggInnUtil.loggInn(request, x);
-			response.sendRedirect("oprettspill");
-
-		} else { 
-			
-			response.sendRedirect("logginn" + "?passwrong");
+	public boolean correctPass(String password, String hash) {
+		try {
+			return PassordUtil.validatePassword(password, hash);
+		} catch (NoSuchAlgorithmException | InvalidKeySpecException ignored) { return false;
 		}
-	}*/
-//	}
+
+	}
+
+	public boolean hasUser(Bruker user) {
+		return user != null;
+	}
 }
