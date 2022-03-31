@@ -23,10 +23,20 @@ public class BrukerDAO {
 	public boolean erLedig(String brukernavn) {
 		return getBruker(brukernavn) == null;
 	}
+
+	
 	
 	//Hovedsakelig her for testing atm
 	public void slettBruker(String brukernavn) {
-		em.createNativeQuery("DELETE FROM Oblig3.bruker WHERE brukernavn = :brukernavn", Bruker.class).setParameter("brukernavn", brukernavn);  //bruker med stor bokstav muligens? også usiker på om "bruker.class" skal være der
+		em.createNativeQuery("DELETE FROM Oblig3.bruker WHERE brukernavn = :brukernavn", Bruker.class).setParameter("brukernavn", brukernavn);  //bruker med stor bokstav muligens? ogsï¿½ usiker pï¿½ om "bruker.class" skal vï¿½re der
+	}
+
+	public boolean hasBruker(String brukernavn) {
+		return em.find(Bruker.class, brukernavn) != null;
+	}
+	public boolean hasEpost(String epost) {
+		//TODO implementasjon
+		return false;
 	}
 	
 	//flere metoder etter behov
