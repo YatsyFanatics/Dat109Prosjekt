@@ -1,6 +1,8 @@
 package presentation.bruker;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;

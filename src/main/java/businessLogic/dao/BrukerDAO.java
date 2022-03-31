@@ -30,11 +30,15 @@ public class BrukerDAO {
 	public boolean erLedig(String brukernavn) {
 		return getBruker(brukernavn) == null;
 	}
+
+	
 	
 	//Hovedsakelig her for testing atm
 	public void slettBruker(String brukernavn) {
-		em.createNativeQuery("DELETE FROM Oblig3.bruker WHERE brukernavn = :brukernavn", Bruker.class).setParameter("brukernavn", brukernavn);  //bruker med stor bokstav muligens? ogs� usiker p� om "bruker.class" skal v�re der
+		em.createNativeQuery("DELETE FROM Oblig3.bruker WHERE brukernavn = :brukernavn", Bruker.class).setParameter("brukernavn", brukernavn); 
+//bruker med stor bokstav muligens? ogs� usiker p� om "bruker.class" skal v�re der
 	}
+
 	
 	//flere metoder etter behov
 }
