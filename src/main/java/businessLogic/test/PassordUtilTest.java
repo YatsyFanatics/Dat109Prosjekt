@@ -8,24 +8,23 @@ import java.security.spec.InvalidKeySpecException;
 
 import org.junit.jupiter.api.Test;
 
-import businessLogic.utils.PassordUtil;
+import static businessLogic.utils.PassordUtil.*;
 
 public class PassordUtilTest {
-	PassordUtil passUtil = new PassordUtil();
 	
 	@Test
 	public void basicPassordTest() throws NoSuchAlgorithmException, InvalidKeySpecException {
 		String pass = "passord123";
-		String hash = passUtil.generateStorngPasswordHash(pass);
-		Boolean validated = PassordUtil.validatePassword(pass, hash);
+		String hash = generateStrongPasswordHash(pass);
+		Boolean validated = validatePassword(pass, hash);
 		assertTrue(validated);
 	}
 	
 	@Test
 	public void feilPassordTest() throws NoSuchAlgorithmException, InvalidKeySpecException {
 		String pass = "correcthorsebatterystaple";
-		String hash = passUtil.generateStorngPasswordHash(pass);
-		Boolean validated = PassordUtil.validatePassword("passord123", hash);
+		String hash = generateStrongPasswordHash(pass);
+		Boolean validated = validatePassword("passord123", hash);
 		assertFalse(validated);
 	}
 	
