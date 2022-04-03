@@ -33,16 +33,46 @@ public class Yatzyspill {
 		}
 	}
 	
+	public Yatzyspill() {
+		
+	}
+	
 	public void startSpill() {
-		
+		//??
 	}
 	
-	public void spillTur() {
-		
+	public void spillTur(String command, boolean[] terningTilstand) {
+		if(command.equalsIgnoreCase("trill") && antallKast < 3) {
+			terningKast(terningTilstand);
+		}else if(command.equalsIgnoreCase("ferdig")) {
+			antallKast = 0;
+			int[] terningVerdier = {terninger[0].getVerdi(), terninger[1].getVerdi(), terninger[2].getVerdi(), terninger[3].getVerdi(), terninger[4].getVerdi()};
+			//TODO rundeNr - 1 om spilleren har hatt yatzy
+			poengtabell.regnUt(getSpillerSinTur(), getRundeNr(), terningVerdier);
+			nesteSpiller();
+		}
 	}
 	
-	public void terningKast() {
+	private void nesteSpiller() {
+		//TODO sjekke om spiller er aktiv
+		spillerSinTur = (spillerSinTur+1) % spillere.length;
+		nesteRunde();
+	}
+
+	private void nesteRunde() {
+		if(spillerSinTur == 0) {
+			rundeNr++;
+		}
+	}
+
+	public void terningKast(boolean[] terningTilstand) {
+		for(int i = 0; i < terninger.length; i++) {
+			if(terningTilstand[i]) {
+				terninger[i].trill();
+			}
+		}
 		
+		antallKast++;
 	}
 	
 	public void kick() {
@@ -55,6 +85,10 @@ public class Yatzyspill {
 	
 	public void regnUtVinner() {
 		
+	}
+	
+	public Bruker hentSpillerSinTur() {
+		return spillere[getSpillerSinTur()];
 	}
 
 	public int getSpillid() {

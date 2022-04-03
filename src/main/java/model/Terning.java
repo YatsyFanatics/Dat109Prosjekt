@@ -13,6 +13,9 @@ public class Terning {
 		this.verdi = (int) Math.floor(((seed)*6)+1);
 	}
 	
+	public void trill() {
+		this.verdi = (int) Math.floor(((Math.random())*6)+1);
+	}
 	
 	public int getVerdi() {
 		return verdi;
