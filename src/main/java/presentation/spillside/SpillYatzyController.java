@@ -21,10 +21,10 @@ import model.Yatzyspill;
 public class SpillYatzyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;    
 	
-	/*@EJB
+	@EJB
 	private BrukerDAO brukerDAO;//Fjern etter testing
 	Yatzyspill yatzyspill = new Yatzyspill(brukerDAO.getBruker("bruker")); //placeholder
-	*/
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
