@@ -20,24 +20,22 @@ import model.Yatzyspill;
 @WebServlet(name = "SpillYatzyController", urlPatterns = "/spillyatzy")
 public class SpillYatzyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;    
+
+	Yatzyspill yatzyspill = new Yatzyspill(); //placeholder
+
 	
-	/*@EJB
-	private BrukerDAO brukerDAO;//Fjern etter testing
-	Yatzyspill yatzyspill = new Yatzyspill(brukerDAO.getBruker("bruker")); //placeholder
-	*/
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		TODO hent terninger fra spillet som kjører
-//		int[] terninger = yatzyspill.getTerningVerdier();
+//		TODO hent terninger fra spillet som kjï¿½rer
+		int[] terninger = yatzyspill.getTerningVerdier();
 //		Ligger for test
+		/*
 		Random trrr = new Random();
 		int[] terninger = new int[5];
 		for (int i = 0; i < 5; i++){
 			terninger[i] = trrr.nextInt(6) +1;
 		}
+		*/
 		request.setAttribute("dice1",terninger[0]);
 		request.setAttribute("dice2",terninger[1]);
 		request.setAttribute("dice3",terninger[2]);
@@ -54,7 +52,7 @@ public class SpillYatzyController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		if(LoggInnUtil.erSpillerSinTur(yatzyspill.hentSpillerSinTur(), request)) {
-			//Kan gjøres om på med metodene som ligger i terning klassen
+			//Kan gjï¿½res om pï¿½ med metodene som ligger i terning klassen
 			boolean terning1 = Boolean.parseBoolean(request.getParameter("terning1"));
 			boolean terning2 = Boolean.parseBoolean(request.getParameter("terning2"));
 			boolean terning3 = Boolean.parseBoolean(request.getParameter("terning3"));
@@ -74,7 +72,7 @@ public class SpillYatzyController extends HttpServlet {
 		boolean[] terningTilstander = {terning1, terning2, terning3, terning4, terning5};
 		yatzyspill.spillTur(request.getParameter("command"), terningTilstander);
 		
-//		response.sendRedirect("loggut");
+		response.sendRedirect("spillyatzy");
 	}
 
 }

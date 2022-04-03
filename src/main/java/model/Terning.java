@@ -7,6 +7,7 @@ public class Terning {
 	public Terning() {
 		super();
 		this.keep = false;
+		trill();
 	}
 	
 	public void trill(double seed) {

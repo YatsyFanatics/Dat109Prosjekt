@@ -202,11 +202,11 @@
             <td><img id='d4' src="images/dice${dice5}.gif" alt="${dice5}" onclick="holddice()"></td>
         </tr>
 		<tr>
-			<td><input type="checkbox" id="terning1" value="false"></td>
-			<td><input type="checkbox" id="terning2" value="false"></td>
-			<td><input type="checkbox" id="terning3" value="false"></td>
-			<td><input type="checkbox" id="terning4" value="false"></td>
-			<td><input type="checkbox" id="terning5" value="false"></td>
+			<td><input type="checkbox" id="terning1" value="true"></td>
+			<td><input type="checkbox" id="terning2" value="true"></td>
+			<td><input type="checkbox" id="terning3" value="true"></td>
+			<td><input type="checkbox" id="terning4" value="true"></td>
+			<td><input type="checkbox" id="terning5" value="true"></td>
 		</tr>
     </table>
 

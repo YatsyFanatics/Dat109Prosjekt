@@ -6,16 +6,16 @@ public class Yatzyspill {
 
 	private final int ANTALLTERNINGER = 5;
 	
-	@Id
+//	@Id
 	private int spillid;
 	private int rundeNr;
-	private Bruker admin; //mulig vi må lagre admin som String for brukeren sin id/brukernavn
+	private Bruker admin; //mulig vi mï¿½ lagre admin som String for brukeren sin id/brukernavn
 	private int spillerSinTur;
 	private Bruker vinner;
 	private Poengtabell poengtabell;
 	private int antallKast;
 	
-	//one to many eller noe sånt
+	//one to many eller noe sï¿½nt
 	private Bruker[] spillere;
 	private Terning[] terninger;
 	
@@ -33,17 +33,21 @@ public class Yatzyspill {
 		}
 	}
 	
-	public Yatzyspill(Bruker spiller) {
+	public Yatzyspill() {
 		rundeNr = 0;
 		antallKast = 0;
 		spillerSinTur = 0;
-		spillere = new Bruker[1];
-		spillere[0] = spiller;
-		poengtabell = new Poengtabell(1);
+
+		poengtabell = new Poengtabell();
+		terninger = new Terning[5];
 		
 		for(int i = 0; i < ANTALLTERNINGER; i++) {
 			terninger[i] = new Terning();
 		}
+		
+		spillere = new Bruker[2];
+		spillere[0] = new Bruker();
+		spillere[1] = new Bruker();
 	}
 	
 	public void startSpill() {
