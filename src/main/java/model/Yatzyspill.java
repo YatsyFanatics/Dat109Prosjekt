@@ -33,16 +33,68 @@ public class Yatzyspill {
 		}
 	}
 	
+	public Yatzyspill(Bruker spiller) {
+		rundeNr = 0;
+		antallKast = 0;
+		spillerSinTur = 0;
+		spillere = new Bruker[1];
+		spillere[0] = spiller;
+		poengtabell = new Poengtabell(1);
+		
+		for(int i = 0; i < ANTALLTERNINGER; i++) {
+			terninger[i] = new Terning();
+		}
+	}
+	
 	public void startSpill() {
-		
+		//??
 	}
 	
-	public void spillTur() {
-		
+	public void spillTur(String command, boolean[] terningTilstand) {
+		if(command.equalsIgnoreCase("trill") && antallKast < 3) {
+			terningKast(terningTilstand);
+		}else if(command.equalsIgnoreCase("ferdig")) {
+			antallKast = 0;
+			//TODO rundeNr - 1 om spilleren har hatt yatzy
+			poengtabell.regnUt(getSpillerSinTur(), getRundeNr(), getTerningVerdier());
+			nesteSpiller();
+		}
 	}
 	
-	public void terningKast() {
+	private void nesteSpiller() {
+		//TODO sjekke om spiller er aktiv
+		spillerSinTur = (spillerSinTur+1) % spillere.length;
+		nesteRunde();
+	}
+
+	private void nesteRunde() {
+		if(spillerSinTur == 0) {
+			rundeNr++;
+		}
 		
+		if(rundeNr == 6) {
+			for(int i = 0; i < spillere.length; i++) {
+				poengtabell.regnUt(i, rundeNr, getTerningVerdier());
+			}
+			rundeNr = 8;
+		}
+		
+		if(rundeNr == 17) {
+			for(int i = 0; i < spillere.length; i++) {
+				poengtabell.regnUt(i, rundeNr, getTerningVerdier());
+			}
+			regnUtVinner();
+		}
+	}
+
+	public void terningKast(boolean[] terningTilstand) {
+		for(int i = 0; i < terninger.length; i++) {
+			if(terningTilstand[i]) {
+				terninger[i].trill();
+			}
+		}
+		
+		antallKast++;
 	}
 	
 	public void kick() {
@@ -54,7 +106,26 @@ public class Yatzyspill {
 	}
 	
 	public void regnUtVinner() {
+		//TODO sjekk etter lik score og inaktive brukere
+		int[] totalScore = poengtabell.hentRad(17);
+		int vinnerScore = totalScore[0];
+		vinner = spillere[0];	
 		
+		for(int i = 1; i < totalScore.length; i++) {
+			if(totalScore[i] > vinnerScore) {
+				vinnerScore = totalScore[i];
+				vinner = spillere[i];
+			}
+		}
+	}
+	
+	public Bruker hentSpillerSinTur() {
+		return spillere[getSpillerSinTur()];
+	}
+	
+	public int[] getTerningVerdier() {
+		int[] verdier = {terninger[0].getVerdi(), terninger[1].getVerdi(), terninger[2].getVerdi(), terninger[3].getVerdi(), terninger[4].getVerdi()};
+		return verdier;
 	}
 
 	public int getSpillid() {
