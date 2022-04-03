@@ -1,6 +1,7 @@
 package presentation.spillside;
 
 import java.io.IOException;
+import java.util.Random;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -20,16 +21,31 @@ import model.Yatzyspill;
 public class SpillYatzyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;    
 	
-	@EJB
+	/*@EJB
 	private BrukerDAO brukerDAO;//Fjern etter testing
 	Yatzyspill yatzyspill = new Yatzyspill(brukerDAO.getBruker("bruker")); //placeholder
-	
+	*/
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+//		TODO hent terninger fra spillet som kjører
+//		int[] terninger = yatzyspill.getTerningVerdier();
+//		Ligger for test
+		Random trrr = new Random();
+		int[] terninger = new int[5];
+		for (int i = 0; i < 5; i++){
+			terninger[i] = trrr.nextInt(6) +1;
+		}
+		request.setAttribute("dice1",terninger[0]);
+		request.setAttribute("dice2",terninger[1]);
+		request.setAttribute("dice3",terninger[2]);
+		request.setAttribute("dice4",terninger[3]);
+		request.setAttribute("dice5",terninger[4]);
 		request.getRequestDispatcher("WEB-INF/jsp/spillyatzy.jsp").forward(request, response);
+
+
 	}
 
 	/**

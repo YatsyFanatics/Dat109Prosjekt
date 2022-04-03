@@ -190,11 +190,30 @@
 		</tbody>
 	</table>
 
-	<button>Trill</button>
-	<button>Ferdig</button>
+
+
+
+    <table>
+        <tr>
+            <td><img id='d0' src="images/dice${dice1}.gif" alt="${dice1}" onclick="holddice()"></td>
+            <td><img id='d1' src="images/dice${dice2}.gif" alt="${dice2}" onclick="holddice()"></td>
+            <td><img id='d2' src="images/dice${dice3}.gif" alt="${dice3}" onclick="holddice()"></td>
+            <td><img id='d3' src="images/dice${dice4}.gif" alt="${dice4}" onclick="holddice()"></td>
+            <td><img id='d4' src="images/dice${dice5}.gif" alt="${dice5}" onclick="holddice()"></td>
+        </tr>
+		<tr>
+			<td><input type="checkbox" id="terning1" value="false"></td>
+			<td><input type="checkbox" id="terning2" value="false"></td>
+			<td><input type="checkbox" id="terning3" value="false"></td>
+			<td><input type="checkbox" id="terning4" value="false"></td>
+			<td><input type="checkbox" id="terning5" value="false"></td>
+		</tr>
+    </table>
 
 	<form method="post">
 		<fieldset>
+			<button name="command" type="submit" value="trill">Trill</button>
+			<button name="command" type="submit" value="ferdig">Ferdig</button>
 				<button type="submit">logg ut</button>
 		</fieldset>
 	</form>
