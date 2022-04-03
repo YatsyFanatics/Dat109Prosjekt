@@ -10,17 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 import businessLogic.dao.BrukerDAO;
 import model.Bruker;
 import businessLogic.utils.LoggInnUtil;
 
-@WebServlet("/index")
+@WebServlet(name = "IndexController", urlPatterns = "/index")
 public class IndexController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
      
 	@EJB
 	private BrukerDAO brukerDAO;
   
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		

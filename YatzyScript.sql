@@ -15,7 +15,13 @@ create table bruker
 );
 
 insert into bruker(brukernavn, passord, fornavn, etternavn, epost)
-values ('tester', 'tester123', 'teste', 'testesen', 't.testesen@gmail.com');
+values (
+'bruker',
+'1000:501716e1a27153480e573aa76592924d:491711dca9b8a9cc2cf33e8c14228da8fa79a21a62a9b5469994ba4c40b8d9a6963711a6fbf34a886d942067ffa19141ba8248ce596d9d5525d1c56b4ebb3989',
+'Ole',
+'Paus',
+'opaus@epost.no');
+
 
 create table yatzyspill
 (

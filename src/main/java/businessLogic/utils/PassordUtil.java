@@ -15,7 +15,7 @@ public class PassordUtil {
 	 * @param nytt passord
 	 * @return et hash for lagring i database
 	 */
-	public String generateStorngPasswordHash(String password) 
+	public static String generateStrongPasswordHash(String password) 
 			throws NoSuchAlgorithmException, InvalidKeySpecException
 	{
 		int iterations = 1000;
