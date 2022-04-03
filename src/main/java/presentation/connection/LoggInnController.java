@@ -37,6 +37,7 @@ public class LoggInnController extends HttpServlet {
 
 		String password = request.getParameter("passord");
 		String brukernavn = request.getParameter("brukernavn");
+
 		Bruker bruker = brukerDAO.getBruker(brukernavn);
 
 		// TODO sanitize input
@@ -52,6 +53,7 @@ public class LoggInnController extends HttpServlet {
 				LoggInnUtil.loggInn(request, bruker);
 				//placeholder, burde sette opp en main/index jsp om vi skal f�lge wireframes
 				response.sendRedirect("opprettspill");
+
 			} else {
 				this.loginMessage = "Passord Stemmer ikke";
 				doGet(request, response);
@@ -60,6 +62,7 @@ public class LoggInnController extends HttpServlet {
 			this.loginMessage = "Bruker eksisterer ikke";
 			doGet(request, response);
 		}
+
 	} 
 
 	public boolean correctPass(String password, String hash) {
@@ -72,5 +75,6 @@ public class LoggInnController extends HttpServlet {
 
 	public boolean hasUser(Bruker user) {
 		return user != null;
+
 	}
 }

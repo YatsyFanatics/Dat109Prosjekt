@@ -1,33 +1,44 @@
 package presentation.spillside;
 
 import java.io.IOException;
+import java.util.List;
+
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class IndexServlet
- */
+
+import businessLogic.dao.BrukerDAO;
+import model.Bruker;
+import businessLogic.utils.LoggInnUtil;
+
 @WebServlet(name = "IndexController", urlPatterns = "/index")
 public class IndexController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+     
+	@EJB
+	private BrukerDAO brukerDAO;
+  
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO if innlogget -> index_in else index_ut
-		request.getRequestDispatcher("WEB-INF/jsp/index_ut.jsp").forward(request, response);
+		
+		
+		request.getRequestDispatcher("WEB-INF/jsp/index_in.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		List<Bruker> DAOliste = brukerDAO.hentAlleBrukere();
+		if (LoggInnUtil.erInnlogget(request)) {
+			request.setAttribute("DAOliste", DAOliste);
+			request.getRequestDispatcher("WEB-INF/jsp/index_in.jsp").forward(request, response);
+		} else {
+			response.sendRedirect("WEB-INF/jsp/index_ut.jsp");
+		}
 	}
 
 }
