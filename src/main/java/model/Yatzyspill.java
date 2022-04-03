@@ -46,9 +46,8 @@ public class Yatzyspill {
 			terningKast(terningTilstand);
 		}else if(command.equalsIgnoreCase("ferdig")) {
 			antallKast = 0;
-			int[] terningVerdier = {terninger[0].getVerdi(), terninger[1].getVerdi(), terninger[2].getVerdi(), terninger[3].getVerdi(), terninger[4].getVerdi()};
 			//TODO rundeNr - 1 om spilleren har hatt yatzy
-			poengtabell.regnUt(getSpillerSinTur(), getRundeNr(), terningVerdier);
+			poengtabell.regnUt(getSpillerSinTur(), getRundeNr(), getTerningVerdier());
 			nesteSpiller();
 		}
 	}
@@ -62,6 +61,20 @@ public class Yatzyspill {
 	private void nesteRunde() {
 		if(spillerSinTur == 0) {
 			rundeNr++;
+		}
+		
+		if(rundeNr == 6) {
+			for(int i = 0; i < spillere.length; i++) {
+				poengtabell.regnUt(i, rundeNr, getTerningVerdier());
+			}
+			rundeNr = 8;
+		}
+		
+		if(rundeNr == 17) {
+			for(int i = 0; i < spillere.length; i++) {
+				poengtabell.regnUt(i, rundeNr, getTerningVerdier());
+			}
+			regnUtVinner();
 		}
 	}
 
@@ -84,11 +97,26 @@ public class Yatzyspill {
 	}
 	
 	public void regnUtVinner() {
+		//TODO sjekk etter lik score og inaktive brukere
+		int[] totalScore = poengtabell.hentRad(17);
+		int vinnerScore = totalScore[0];
+		vinner = spillere[0];	
 		
+		for(int i = 1; i < totalScore.length; i++) {
+			if(totalScore[i] > vinnerScore) {
+				vinnerScore = totalScore[i];
+				vinner = spillere[i];
+			}
+		}
 	}
 	
 	public Bruker hentSpillerSinTur() {
 		return spillere[getSpillerSinTur()];
+	}
+	
+	public int[] getTerningVerdier() {
+		int[] verdier = {terninger[0].getVerdi(), terninger[1].getVerdi(), terninger[2].getVerdi(), terninger[3].getVerdi(), terninger[4].getVerdi()};
+		return verdier;
 	}
 
 	public int getSpillid() {
