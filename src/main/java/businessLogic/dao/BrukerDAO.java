@@ -1,5 +1,7 @@
 package businessLogic.dao;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,8 +28,10 @@ public class BrukerDAO {
 	
 	//Hovedsakelig her for testing atm
 	public void slettBruker(String brukernavn) {
-		em.createNativeQuery("DELETE FROM Oblig3.bruker WHERE brukernavn = :brukernavn", Bruker.class).setParameter("brukernavn", brukernavn);  //bruker med stor bokstav muligens? også usiker på om "bruker.class" skal være der
+		em.createNativeQuery("DELETE FROM Oblig3.bruker WHERE brukernavn = :brukernavn", Bruker.class).setParameter("brukernavn", brukernavn);  //bruker med stor bokstav muligens? ogsï¿½ usiker pï¿½ om "bruker.class" skal vï¿½re der
 	}
-	
+	public List<Bruker> hentAlleBrukere() {
+		return em.createQuery("select d from Bruker d", Bruker.class).getResultList();
+	}
 	//flere metoder etter behov
 }

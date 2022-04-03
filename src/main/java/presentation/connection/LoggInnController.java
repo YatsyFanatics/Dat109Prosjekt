@@ -47,7 +47,8 @@ public class LoggInnController extends HttpServlet {
 				//TODO passord validering ovenfor i if
 				request.getSession(true);
 				request.getSession(false).setAttribute("bruker", bruker);
-				response.sendRedirect("opprettspill"); //placeholder, burde sette opp en main/index jsp om vi skal følge wireframes
+				LoggInnUtil.loggInn(request, bruker);
+				response.sendRedirect("opprettspill"); //placeholder, burde sette opp en main/index jsp om vi skal fï¿½lge wireframes
 			} else {
 				response.sendRedirect("passwrong");
 			}	
@@ -57,22 +58,30 @@ public class LoggInnController extends HttpServlet {
 		
 		//Dunno ka som skjer under her TBH
 		
-//		if (epost == null && passord == null || !Validator.isValidEpost(epost)) {
-//			response.sendRedirect("opprettspill");
+		/*sjekka om ruten for epost og passord er tom og om epost eksistera i databasen.
+		
+		if (epost == null && passord == null || !Validator.isValidEpost(epost)){
 			//response.sendRedirect("logginn" + "?invalidinput");
-		} /*else {
-		//Bruker x = brukerDAO.hentBruker(epost);
-
+			 */
+		
+		/* henta bruker x pÃ¥ epost
+		
+		}else {
+		Bruker x = brukerDAO.hentBruker(epost);
+		*/
+		
+		/* sjekka om bruker eksistera deretter om passord stemmer
+		  
 		  if( x == null ) { 
 			response.sendRedirect("logginn" + "?invaliddeltager");
 		} else if (Validator.finnPassord(x, passord)) {
 			LoggInnUtil.loggInn(request, x);
-			response.sendRedirect("oprettspill");
+			response.sendRedirect("deltagerListe");
 
-		} else { 
+		} else {
 			
 			response.sendRedirect("logginn" + "?passwrong");
 		}
 	}*/
-//	}
+	}
 }
