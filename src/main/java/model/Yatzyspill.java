@@ -33,8 +33,17 @@ public class Yatzyspill {
 		}
 	}
 	
-	public Yatzyspill() {
+	public Yatzyspill(Bruker spiller) {
+		rundeNr = 0;
+		antallKast = 0;
+		spillerSinTur = 0;
+		spillere = new Bruker[1];
+		spillere[0] = spiller;
+		poengtabell = new Poengtabell(1);
 		
+		for(int i = 0; i < ANTALLTERNINGER; i++) {
+			terninger[i] = new Terning();
+		}
 	}
 	
 	public void startSpill() {
