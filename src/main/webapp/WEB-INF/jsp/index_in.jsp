@@ -11,7 +11,7 @@
 <body>
 
 	<h2>Yatzy Fanatics</h2>
-	<a href="Opprettspill"><button>Opprett spill</button></a><br>
+	<a href="opprettspill"><button>Opprett spill</button></a><br>
     <a href="loggut"><button>Logg ut</button></a>
 </body>
 </html>
