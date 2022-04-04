@@ -45,9 +45,19 @@ public class Yatzyspill {
 			terninger[i] = new Terning();
 		}
 		
-		spillere = new Bruker[2];
+		spillere = new Bruker[6];
 		spillere[0] = new Bruker();
+		spillere[0].setBrukernavn("Endre");
 		spillere[1] = new Bruker();
+		spillere[1].setBrukernavn("Alexander");
+		spillere[2] = new Bruker();
+		spillere[2].setBrukernavn("Jurgen");
+		spillere[3] = new Bruker();
+		spillere[3].setBrukernavn("Eivind");
+		spillere[4] = new Bruker();
+		spillere[4].setBrukernavn("Erik");
+		spillere[5] = new Bruker();
+		spillere[5].setBrukernavn("Ulrik");
 	}
 	
 	public void startSpill() {
@@ -55,13 +65,17 @@ public class Yatzyspill {
 	}
 	
 	public void spillTur(String command, boolean[] terningTilstand) {
-		if(command.equalsIgnoreCase("trill") && antallKast < 3) {
+		if(command.equalsIgnoreCase("trill") && antallKast < 3 && antallKast > 0) {
 			terningKast(terningTilstand);
-		}else if(command.equalsIgnoreCase("ferdig")) {
+		}else if(command.equalsIgnoreCase("ferdig") && antallKast > 0) {
 			antallKast = 0;
 			//TODO rundeNr - 1 om spilleren har hatt yatzy
 			poengtabell.regnUt(getSpillerSinTur(), getRundeNr(), getTerningVerdier());
 			nesteSpiller();
+		}else if(command.equalsIgnoreCase("trill") && antallKast == 0) {
+			
+			boolean[] boolArr = {false,false,false,false,false};
+			terningKast(boolArr);
 		}
 	}
 	
@@ -202,5 +216,16 @@ public class Yatzyspill {
 
 	public void setTerninger(Terning[] terninger) {
 		this.terninger = terninger;
+	}
+	public int[] hentSpillerPoeng(int spillerNr) {
+		return poengtabell.hentSpillerPoeng(spillerNr);
+	}
+	
+	public String[] hentSpillereString(){
+		String[] s = new String[spillere.length];
+		for(int i = 0; i < spillere.length; i++) {
+			s[i] = spillere[i].getBrukernavn();
+		}
+		return s;
 	}
 }
