@@ -4,6 +4,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import model.Bruker;
 import model.Yatzyspill;
 
 @Stateless
@@ -22,7 +23,7 @@ public class YatzyspillDAO {
 	
 	//Usikker på hvilke av de under det faktisk er behov for.
 	
-	public String getAdmin(String spillid) {
+	public Bruker getAdmin(String spillid) {
 		return getSpill(spillid).getAdmin();
 	}
 }

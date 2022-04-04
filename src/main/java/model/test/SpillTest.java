@@ -26,7 +26,7 @@ public class SpillTest {
         spillere[0] = Erik;
         spillere[1] = Jorgen;
         spillere[2] = Eivind;
-        yatzyspill = new Yatzyspill(1,"Erik",spillere);
+        yatzyspill = new Yatzyspill(1, Erik, spillere);
         poengtabell = new Poengtabell(3);
         yatzyspill.startSpill();
     }

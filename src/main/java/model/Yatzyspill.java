@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,19 +17,21 @@ public class Yatzyspill {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int spillid;
+
+	@OneToOne
+	@JoinColumn(name = "admin")
+	private Bruker admin; 
+
 	private int rundeNr;
-//	private Bruker admin; //mulig vi må lagre admin som String for brukeren sin id/brukernavn
-	private String admin;
 	private int spillerSinTur;
 	private Bruker vinner;
 	private Poengtabell poengtabell;
 	private int antallKast;
 	
-	//one to many eller noe sï¿½nt
 	private Bruker[] spillere;
 	private Terning[] terninger;
 	
-	public Yatzyspill(int spillid, String admin, Bruker[] spillere) {
+	public Yatzyspill(int spillid, Bruker admin, Bruker[] spillere) {
 		rundeNr = 0;
 		antallKast = 0;
 		spillerSinTur = 0;
@@ -156,11 +160,11 @@ public class Yatzyspill {
 		this.rundeNr = rundeNr;
 	}
 
-	public String getAdmin() {
+	public Bruker getAdmin() {
 		return admin;
 	}
 
-	public void setAdmin(String admin) {
+	public void setAdmin(Bruker admin) {
 		this.admin = admin;
 	}
 
