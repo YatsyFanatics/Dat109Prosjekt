@@ -1,7 +1,11 @@
 package model;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "yatzyspill", schema = "oblig3")
 public class Yatzyspill {
 
 	private final int ANTALLTERNINGER = 5;
@@ -9,7 +13,8 @@ public class Yatzyspill {
 	@Id
 	private int spillid;
 	private int rundeNr;
-	private Bruker admin; //mulig vi må lagre admin som String for brukeren sin id/brukernavn
+//	private Bruker admin; //mulig vi må lagre admin som String for brukeren sin id/brukernavn
+	private String admin;
 	private int spillerSinTur;
 	private Bruker vinner;
 	private Poengtabell poengtabell;
@@ -19,7 +24,7 @@ public class Yatzyspill {
 	private Bruker[] spillere;
 	private Terning[] terninger;
 	
-	public Yatzyspill(int spillid, Bruker admin, Bruker[] spillere) {
+	public Yatzyspill(int spillid, String admin, Bruker[] spillere) {
 		rundeNr = 0;
 		antallKast = 0;
 		spillerSinTur = 0;
@@ -144,11 +149,11 @@ public class Yatzyspill {
 		this.rundeNr = rundeNr;
 	}
 
-	public Bruker getAdmin() {
+	public String getAdmin() {
 		return admin;
 	}
 
-	public void setAdmin(Bruker admin) {
+	public void setAdmin(String admin) {
 		this.admin = admin;
 	}
 
