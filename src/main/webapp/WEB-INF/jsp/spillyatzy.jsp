@@ -17,12 +17,12 @@
 		<tbody>
 			<tr>
 				<td><strong>Spillere:</strong></td>
-				<td><span class="tur" <c:if test="${spillerListe[0]}.equals(${spillerSinTur})}"><span class="tur"</c:if> >${spillerListe[0]}</span></td>
-				<td>${spillerListe[1]}</td>
-				<td>${spillerListe[2]}</td>
-				<td>${spillerListe[3]}</td>
-				<td>${spillerListe[4]}</td>
-				<td>${spillerListe[5]}</td>
+				<td><span <c:if test="${spillerSinTur == 0}"> class="tur"</c:if>>  ${spillerListe[0]}</span></td>
+				<td><span <c:if test="${spillerSinTur == 1}"> class="tur"</c:if>>  ${spillerListe[1]}</span></td>
+				<td><span <c:if test="${spillerSinTur == 2}"> class="tur"</c:if>>  ${spillerListe[2]}</span></td>
+				<td><span <c:if test="${spillerSinTur == 3}"> class="tur"</c:if>>  ${spillerListe[3]}</span></td>
+				<td><span <c:if test="${spillerSinTur == 4}"> class="tur"</c:if>>  ${spillerListe[4]}</span></td>
+				<td><span <c:if test="${spillerSinTur == 5}"> class="tur"</c:if>>  ${spillerListe[5]}</span></td>
 			</tr>
 			<tr>
 				<td>Enere</td>

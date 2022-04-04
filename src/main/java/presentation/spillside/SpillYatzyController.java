@@ -46,7 +46,7 @@ public class SpillYatzyController extends HttpServlet {
 		
 		request.setAttribute("spillerListe", yatzyspill.hentSpillereString());
 		
-		request.setAttribute("spillerSinTur", yatzyspill.hentSpillerSinTur());
+		request.setAttribute("spillerSinTur", yatzyspill.getSpillerSinTur());
 		
 		request.setAttribute("spiller1liste", yatzyspill.hentSpillerPoeng(0));
 		request.setAttribute("spiller2liste", yatzyspill.hentSpillerPoeng(1));
