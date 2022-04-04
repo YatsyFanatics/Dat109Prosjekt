@@ -1,6 +1,8 @@
 package model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -11,6 +13,7 @@ public class Yatzyspill {
 	private final int ANTALLTERNINGER = 5;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int spillid;
 	private int rundeNr;
 //	private Bruker admin; //mulig vi må lagre admin som String for brukeren sin id/brukernavn
