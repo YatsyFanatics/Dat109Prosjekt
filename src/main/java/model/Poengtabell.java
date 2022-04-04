@@ -326,5 +326,13 @@ public class Poengtabell {
 	public int[] hentRad(int i) {
 		return yatzyTabell[i];
 	}
+	
+	public int[] hentSpillerPoeng(int spillerNr) {
+		int[] arr = new int[18];
+		for(int i = 0; i<18; i++) {
+			arr[i] = yatzyTabell[i][spillerNr];
+		}
+		return arr;
+	}
 
 }
