@@ -1,23 +1,32 @@
 package model.test;
 
+import model.Bruker;
+import model.Poengtabell;
+import model.Yatzyspill;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.Assert.assertEquals;
 
-//Får ikke testet om alt dette funker da Intellij hater klassestrukturen som dere har laget
+//Masse nullpointers så får ikke testa en dritt
 public class SpillTest {
 
-       /* Yatzyspill yatzyspill;
+        Yatzyspill yatzyspill;
         Poengtabell poengtabell;
+        Bruker Erik;
+        Bruker Jorgen;
+        Bruker Eivind;
+        Bruker[] spillere = new Bruker[3];
     @BeforeEach
     public void reset(){
 
-        Bruker Erik = new Bruker();
-        Bruker Jorgen = new Bruker();
-        Bruker Eivind = new Bruker();
-        Bruker[] spillere = {Eivind,Erik,Jorgen};
-        yatzyspill = new Yatzyspill(1,Erik,spillere);
+        Erik = new Bruker("Erik", "Erik", "ASD", "asd@asd.no", "123123123");
+        Jorgen = new Bruker("Jorgen", "Jorgen", "ASD", "asdasd@sad.no", "321321321");
+        Eivind = new Bruker("Eivind", "Eivind", "Sasd", "sadsad@sad.no", "123321123");
+        spillere[0] = Erik;
+        spillere[1] = Jorgen;
+        spillere[2] = Eivind;
+        yatzyspill = new Yatzyspill(1,"Erik",spillere);
         poengtabell = new Poengtabell(3);
         yatzyspill.startSpill();
     }
@@ -25,9 +34,9 @@ public class SpillTest {
     @Test
     public void spillSattopp(){
 
-        assertEquals(Erik,yatzyspill.getAdmin());
+        assertEquals(Erik.getBrukernavn(),yatzyspill.getAdmin());
         assertEquals(yatzyspill.getSpillid(), 1);
-        assertEquals(yatzyspill.getSpillerSinTur(), Eivind);
+        assertEquals(yatzyspill.getSpillerSinTur(), Eivind.getBrukernavn());
     }
 
     @Test
@@ -37,6 +46,7 @@ public class SpillTest {
 
     @Test
     public void testVinner(){
+
         yatzyspill.setVinner(Erik);
         yatzyspill.regnUtVinner();
     }
@@ -45,5 +55,5 @@ public class SpillTest {
     public void testPurre(){}
 
     @Test
-    public void testKick(){}*/
+    public void testKick(){}
 }
