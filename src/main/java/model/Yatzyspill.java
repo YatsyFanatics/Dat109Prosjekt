@@ -93,7 +93,7 @@ public class Yatzyspill {
 
 	public void terningKast(boolean[] terningTilstand) {
 		for(int i = 0; i < terninger.length; i++) {
-			if(terningTilstand[i]) {
+			if(!terningTilstand[i]) {
 				terninger[i].trill();
 			}
 		}

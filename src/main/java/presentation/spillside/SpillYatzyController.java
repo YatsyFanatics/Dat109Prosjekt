@@ -19,60 +19,78 @@ import model.Yatzyspill;
  */
 @WebServlet(name = "SpillYatzyController", urlPatterns = "/spillyatzy")
 public class SpillYatzyController extends HttpServlet {
-	private static final long serialVersionUID = 1L;    
+	private static final long serialVersionUID = 1L;
 
-	Yatzyspill yatzyspill = new Yatzyspill(); //placeholder
+	Yatzyspill yatzyspill = new Yatzyspill(); // placeholder
 
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		TODO hent terninger fra spillet som kj�rer
-		int[] terninger = yatzyspill.getTerningVerdier();
+//		int[] terninger = yatzyspill.getTerningVerdier();
 //		Ligger for test
-		/*
-		Random trrr = new Random();
-		int[] terninger = new int[5];
-		for (int i = 0; i < 5; i++){
-			terninger[i] = trrr.nextInt(6) +1;
-		}
-		*/
-		request.setAttribute("dice1",terninger[0]);
-		request.setAttribute("dice2",terninger[1]);
-		request.setAttribute("dice3",terninger[2]);
-		request.setAttribute("dice4",terninger[3]);
-		request.setAttribute("dice5",terninger[4]);
-		request.getRequestDispatcher("WEB-INF/jsp/spillyatzy.jsp").forward(request, response);
 
+		/*
+		 * Random trrr = new Random(); int[] terninger = new int[5]; for (int i = 0; i <
+		 * 5; i++) { terninger[i] = trrr.nextInt(6) + 1; }
+		 */
+
+		int[] terninger = yatzyspill.getTerningVerdier();
+		request.setAttribute("dice1", terninger[0]);
+		request.setAttribute("dice2", terninger[1]);
+		request.setAttribute("dice3", terninger[2]);
+		request.setAttribute("dice4", terninger[3]);
+		request.setAttribute("dice5", terninger[4]);
+
+		request.getRequestDispatcher("WEB-INF/jsp/spillyatzy.jsp").forward(request, response);
 
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		if(LoggInnUtil.erSpillerSinTur(yatzyspill.hentSpillerSinTur(), request)) {
-			//Kan gj�res om p� med metodene som ligger i terning klassen
-			boolean terning1 = Boolean.parseBoolean(request.getParameter("terning1"));
-			boolean terning2 = Boolean.parseBoolean(request.getParameter("terning2"));
-			boolean terning3 = Boolean.parseBoolean(request.getParameter("terning3"));
-			boolean terning4 = Boolean.parseBoolean(request.getParameter("terning4"));
-			boolean terning5 = Boolean.parseBoolean(request.getParameter("terning5"));
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-			boolean[] terningTilstander = {terning1, terning2, terning3, terning4, terning5};
-			yatzyspill.spillTur(request.getParameter("command"), terningTilstander);
+		// if(LoggInnUtil.erSpillerSinTur(yatzyspill.hentSpillerSinTur(), request)) {
+		boolean terning1;
+		System.out.println(request.getParameter("terning1"));
+		if (request.getParameter("terning1") == null) {
+			terning1 = false;
+		} else {
+			terning1 = true;
 		}
-		//fjern under etter testing
-		boolean terning1 = Boolean.parseBoolean(request.getParameter("terning1"));
-		boolean terning2 = Boolean.parseBoolean(request.getParameter("terning2"));
-		boolean terning3 = Boolean.parseBoolean(request.getParameter("terning3"));
-		boolean terning4 = Boolean.parseBoolean(request.getParameter("terning4"));
-		boolean terning5 = Boolean.parseBoolean(request.getParameter("terning5"));
+		boolean terning2;
+		if (request.getParameter("terning2") == null) {
+			terning2 = false;
+		} else {
+			terning2 = true;
+		}
+		boolean terning3;
+		if (request.getParameter("terning3") == null) {
+			terning3 = false;
+		} else {
+			terning3 = true;
+		}
+		boolean terning4;
+		if (request.getParameter("terning4") == null) {
+			terning4 = false;
+		} else {
+			terning4 = true;
+		}
+		boolean terning5;
+		if (request.getParameter("terning5") == null) {
+			terning5 = false;
+		} else {
+			terning5 = true;
+		}
 
-		boolean[] terningTilstander = {terning1, terning2, terning3, terning4, terning5};
+		boolean[] terningTilstander = { terning1, terning2, terning3, terning4, terning5 };
 		yatzyspill.spillTur(request.getParameter("command"), terningTilstander);
-		
-		response.sendRedirect("spillyatzy");
+		// }
+
+		doGet(request, response);
 	}
 
 }
