@@ -22,9 +22,12 @@ public class SpillYatzyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	Yatzyspill yatzyspill = new Yatzyspill(); // placeholder
+	
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		TODO hent terninger fra spillet som kj�rer
 //		int[] terninger = yatzyspill.getTerningVerdier();
