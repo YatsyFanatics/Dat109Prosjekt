@@ -10,7 +10,6 @@
         
         <class>model.Bruker</class>
         <class>model.Yatzyspill</class>
-        <class>model.Spilldeltakelse</class>
         
         <properties>
             <property name="eclipselink.weaving" value="false" />
