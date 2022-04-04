@@ -9,7 +9,6 @@
         <jta-data-source>DAT109DataSource</jta-data-source>
         
         <class>model.Bruker</class>
-        <class>model.Yatzyspill</class>
         
         <properties>
             <property name="eclipselink.weaving" value="false" />
