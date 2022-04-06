@@ -209,7 +209,7 @@ public class Poengtabell {
 		for (int i = 1; i <= 5 && funnet; i++) {
 			if (arr[i-1] != i) {
 				funnet = false;
-			}System.out.println("liten " + i + " " + arr[i-1]  + " " + funnet);
+			}
 		}
 		
 		if (funnet) {
@@ -226,7 +226,7 @@ public class Poengtabell {
 		for (int i = 2; i <= 6 && funnet; i++) {
 			if (arr[i-2] != i) {
 				funnet = false;
-			}System.out.println("stor " + i + " " + arr[i-2]  + " " + funnet);
+			}
 		}
 
 		if (funnet) {

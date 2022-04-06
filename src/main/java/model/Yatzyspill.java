@@ -39,8 +39,6 @@ public class Yatzyspill {
 		antallKast = 0;
 		spillerSinTur = 0;
 
-		rundeNr = 12;
-
 		poengtabell = new Poengtabell();
 		terninger = new Terning[5];
 
@@ -249,6 +247,6 @@ public class Yatzyspill {
 
 	public boolean harYatzy(int spillerNr) {
 
-		return poengtabell.hentVerdi(16, spillerNr) > 0;
+		return poengtabell.hentVerdi(16, spillerNr) == 50;
 	}
 }
