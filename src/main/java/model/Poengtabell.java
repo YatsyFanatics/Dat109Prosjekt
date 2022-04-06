@@ -86,7 +86,7 @@ public class Poengtabell {
 			break;
 
 		case 16:
-			yatzy(spillerNr); // yatzy forutsetter sjekk gjort i spill klassen, kan diskuteres
+			yatzy(spillerNr,arr);
 			break;
 
 		case 17:
@@ -276,8 +276,12 @@ public class Poengtabell {
 
 	}
 
-	public void yatzy(int spillerNr) {
+	public void yatzy(int spillerNr, int[] arr) {
+		if(sjekkYatzy(arr)) {
 		settInn(16, spillerNr, yatzyPoeng);
+		}else {
+			settInn(16, spillerNr, 0);
+		}
 	}
 
 	public void total(int spillerNr) {
