@@ -333,7 +333,7 @@ public class Poengtabell {
 	public boolean sjekkYatzy(int[] arr) {
 		boolean sjekkYatzy = true;
 		
-		for(int i = 0; i<5; i++) {
+		for(int i = 0; i<4; i++) {
 			if(arr[i] != arr[i+1]) {
 				sjekkYatzy = false;
 			}

@@ -67,7 +67,8 @@ public class Yatzyspill {
 
 	public void spillTur(String command, boolean[] terningTilstand) {
 		if (command.equalsIgnoreCase("trill") && antallKast < 3 && antallKast > 0) {
-			terningKast(terningTilstand);
+			oppdaterTerninger(terningTilstand);
+			terningKast();
 		} else if (command.equalsIgnoreCase("ferdig") && antallKast > 0) {
 			antallKast = 0;
 
@@ -81,15 +82,28 @@ public class Yatzyspill {
 					poengtabell.regnUt(spillerSinTur, rundeNr, getTerningVerdier());
 				}
 			}
-
+			resetTerninger();
 			nesteSpiller();
 		} else if (command.equalsIgnoreCase("trill") && antallKast == 0) {
 
-			boolean[] boolArr = { false, false, false, false, false };
-			terningKast(boolArr);
+			resetTerninger();
+			
+			terningKast();
 		}
 	}
+	
+	public void resetTerninger() {
+		boolean[] boolArr = { false, false, false, false, false };
 
+		oppdaterTerninger(boolArr);
+	}
+
+	public void oppdaterTerninger(boolean[] boolArr) {
+		for (int i = 0; i < terninger.length ; i++) {
+			terninger[i].setKeep(boolArr[i]);
+		}
+	}
+	
 	private void nesteSpiller() {
 		// TODO sjekke om spiller er aktiv
 		spillerSinTur = (spillerSinTur + 1) % spillere.length;
@@ -121,11 +135,9 @@ public class Yatzyspill {
 		}
 	}
 
-	public void terningKast(boolean[] terningTilstand) {
-		for (int i = 0; i < terninger.length; i++) {
-			if (!terningTilstand[i]) {
-				terninger[i].trill();
-			}
+	public void terningKast() {
+		for (Terning t : terninger) {
+			t.trill();
 		}
 
 		antallKast++;
@@ -250,5 +262,11 @@ public class Yatzyspill {
 	public boolean harYatzy(int spillerNr) {
 
 		return poengtabell.hentVerdi(16, spillerNr) == 50;
+	}
+
+	public boolean[] terningStatus() {
+		boolean[] keeper = { terninger[0].isKeeping(), terninger[1].isKeeping(), terninger[2].isKeeping(),
+				terninger[3].isKeeping(), terninger[4].isKeeping() };
+		return keeper;
 	}
 }

@@ -59,34 +59,35 @@ table, th, td {
 }
 
 .dicearea {
-	order: 2;
-	align-items:center;
-	background-color: DodgerBlue;
+	order: 1;
+	align-items: center;
 }
 
-.spill{
+.spill {
+	display: flex;
+	order: 3;
 	flex-direction: row;
-
-}
-
-.top{
-	flex-direction: row;
-
+	align-items: center;
 }
 
 .poengtabell {
-	order: 3;
-	background-color: green;
+	order: 2;
 }
 
 .header {
-	order: 1;
-	background-color: red;
+
+	display: flex;
+	order: 2;
+	align-self: center;
+	justify-content: center;
 }
 
+
 .loggut {
-	order: 4; 
-	background-color: yellow;
+	display: flex;
+	order: 1;
+	justify-content: end;
+	align-self: stretch;
 }
 
 .flex-container {
@@ -94,5 +95,6 @@ table, th, td {
 	flex-direction: column;
 	font-weight: bold;
 	text-align: center;
+	align-items: center;
+	justify-content: center;
 }
-

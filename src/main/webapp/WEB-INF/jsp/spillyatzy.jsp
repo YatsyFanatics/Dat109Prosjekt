@@ -10,27 +10,24 @@
 <link rel="stylesheet" href="css/main.css" type="text/css" />
 <title>YYYYYYYatzy time!!!!</title>
 </head>
+
 <body>
-	<div class=flex-container>
-		
-			<div class=head>
-				<h2>Yatzy time!</h2>
+	<div class="flex-container">
+		<div class="header">
+			<h2>Yatzy time!</h2>
 
-				<span class="melding"> ${loginMessage} </span>
-			</div>
-			<div class=loggut>
-				<form method=post>
-					<fieldset>
+			<span class="melding"> ${loginMessage} </span>
+		</div>
 
-						<button type="submit">logg ut</button>
-					</fieldset>
-				</form>
-			</div>
-		
+		<div class="loggut">
+			<form method=post>
 
+				<button type="submit">logg ut</button>
+			</form>
+		</div>
 
-		<div class = spill>
-			<div class=poengtabell>
+		<div class="spill">
+			<div class="poengtabell">
 				<table>
 					<tbody>
 						<tr>
@@ -163,7 +160,7 @@
 							<td>${spiller6liste[11]}</td>
 						</tr>
 						<tr>
-							<td>Liten straight</td>
+							<td>Liten stright</td>
 							<td>${spiller1liste[12]}</td>
 							<td>${spiller2liste[12]}</td>
 							<td>${spiller3liste[12]}</td>
@@ -172,7 +169,7 @@
 							<td>${spiller6liste[12]}</td>
 						</tr>
 						<tr>
-							<td>Stor straight</td>
+							<td>Stor stright</td>
 							<td>${spiller1liste[13]}</td>
 							<td>${spiller2liste[13]}</td>
 							<td>${spiller3liste[13]}</td>
@@ -220,7 +217,7 @@
 				</table>
 			</div>
 
-			<div class=dicearea>
+			<div class="dicearea">
 				<form method="post">
 					<table>
 						<tr>
@@ -238,15 +235,20 @@
 						</tr>
 						<tr>
 							<td><input type="checkbox" id="terning1" name="terning1"
-								value="true"></td>
+								value="true"
+								<c:if test="${terningStatus[0] == true}"> checked</c:if>></td>
 							<td><input type="checkbox" id="terning2" name="terning2"
-								value="true"></td>
+								value="true"
+								<c:if test="${terningStatus[1] == true}"> checked</c:if>></td>
 							<td><input type="checkbox" id="terning3" name="terning3"
-								value="true"></td>
+								value="true"
+								<c:if test="${terningStatus[2] == true}"> checked</c:if>></td>
 							<td><input type="checkbox" id="terning4" name="terning4"
-								value="true"></td>
+								value="true"
+								<c:if test="${terningStatus[3] == true}"> checked</c:if>></td>
 							<td><input type="checkbox" id="terning5" name="terning5"
-								value="true"></td>
+								value="true"
+								<c:if test="${terningStatus[4] == true}"> checked</c:if>></td>
 						</tr>
 					</table>
 					<button name="command" type="submit" value="trill">Trill</button>
@@ -255,7 +257,7 @@
 			</div>
 		</div>
 
-</div>
+	</div>
 
 
 </body>
