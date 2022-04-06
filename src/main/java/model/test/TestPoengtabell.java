@@ -48,7 +48,7 @@ public class TestPoengtabell {
 		int[] arr10 = { 6, 6, 6, 3, 6 };
 		tabellen.fireLike(0, arr10);
 		
-		int[] arr11 = { 1, 2, 3, 4, 5 };
+		int[] arr11 = { 5, 2, 3, 4, 1 };
 		tabellen.litenStright(0, arr11);
 		
 		int[] arr12 = { 6, 2, 3, 4, 5 };

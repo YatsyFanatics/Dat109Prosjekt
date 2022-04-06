@@ -73,7 +73,10 @@ public class Yatzyspill {
 			antallKast = 0;
 
 			if (poengtabell.sjekkYatzy(getTerningVerdier()) && !harYatzy(spillerSinTur)) {
+
+
 				poengtabell.yatzy(spillerSinTur,getTerningVerdier());
+
 			} else {
 
 				if (harYatzy(spillerSinTur)) {
@@ -124,7 +127,11 @@ public class Yatzyspill {
 		}
 
 		if (rundeNr == 16 && !harYatzy(spillerSinTur)) {
+
+
 			poengtabell.regnUt(spillerSinTur, rundeNr, getTerningVerdier());
+
+
 		}
 
 		if (rundeNr == 17) {
