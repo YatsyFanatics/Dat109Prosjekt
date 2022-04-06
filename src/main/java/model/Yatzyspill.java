@@ -70,13 +70,18 @@ public class Yatzyspill {
 			terningKast(terningTilstand);
 		} else if (command.equalsIgnoreCase("ferdig") && antallKast > 0) {
 			antallKast = 0;
-			
-			if (harYatzy(spillerSinTur)) {
-				poengtabell.regnUt(spillerSinTur, forrigeRunde, getTerningVerdier());
+
+			if (poengtabell.sjekkYatzy(getTerningVerdier()) && !harYatzy(spillerSinTur)) {
+				poengtabell.yatzy(spillerSinTur);
 			} else {
-				poengtabell.regnUt(spillerSinTur, rundeNr, getTerningVerdier());
+
+				if (harYatzy(spillerSinTur)) {
+					poengtabell.regnUt(spillerSinTur, forrigeRunde, getTerningVerdier());
+				} else {
+					poengtabell.regnUt(spillerSinTur, rundeNr, getTerningVerdier());
+				}
 			}
-			
+
 			nesteSpiller();
 		} else if (command.equalsIgnoreCase("trill") && antallKast == 0) {
 
@@ -103,12 +108,9 @@ public class Yatzyspill {
 			}
 			rundeNr = 8;
 		}
-		
-		if (rundeNr == 16) {
-			for (int i = 0; i < spillere.length; i++) {
-				poengtabell.regnUt(i, rundeNr, getTerningVerdier());
-			}
-			regnUtVinner();
+
+		if (rundeNr == 16 && !harYatzy(spillerSinTur)) {
+
 		}
 
 		if (rundeNr == 17) {

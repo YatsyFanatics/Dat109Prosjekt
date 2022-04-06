@@ -329,5 +329,16 @@ public class Poengtabell {
 		}
 		return arr;
 	}
+	
+	public boolean sjekkYatzy(int[] arr) {
+		boolean sjekkYatzy = true;
+		
+		for(int i = 0; i<5; i++) {
+			if(arr[i] != arr[i+1]) {
+				sjekkYatzy = false;
+			}
+		}
+		return sjekkYatzy;
+	}
 
 }
