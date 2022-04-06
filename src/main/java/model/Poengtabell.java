@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Arrays;
+
 public class Poengtabell {
 
 	public final static int bonusGrense = 42;
@@ -46,11 +48,11 @@ public class Poengtabell {
 		case 6:
 			sum(spillerNr);
 			break;
-			
+
 //		case 7:
 //			bonus();
 //			break;
-			
+
 		case 8:
 			ettPar(spillerNr, arr);
 			break;
@@ -202,19 +204,16 @@ public class Poengtabell {
 	}
 
 	public void litenStright(int spillerNr, int[] arr) {
-		int sum = 0;
-		boolean funnet = false;
-		for (int i = 1; i <= 5; i++) {
-			for (int n = 1; n <= 5 && !funnet; n++) {
-				if (i == n) {
-					sum += n;
-					funnet = true;
-				}
+		boolean funnet = true;
+		Arrays.sort(arr);
+		for (int i = 1; i <= 5 && funnet; i++) {
+			if (arr[i-1] != i) {
+				funnet = false;
 			}
-			funnet = false;
 		}
-		if (sum == (1 + 2 + 3 + 4 + 5)) {
-			settInn(12, spillerNr, sum);
+		
+		if (funnet) {
+			settInn(12, spillerNr, (1+2+3+4+5));
 		} else {
 			settInn(12, spillerNr, 0);
 		}
@@ -222,23 +221,19 @@ public class Poengtabell {
 	}
 
 	public void storStright(int spillerNr, int[] arr) {
-		int sum = 0;
-		boolean funnet = false;
-		for (int i = 2; i <= 6; i++) {
-			for (int n = 2; n <= 6 && !funnet; n++) {
-				if (i == n) {
-					sum += i;
-					funnet = true;
-				}
+		boolean funnet = true;
+		Arrays.sort(arr);
+		for (int i = 2; i <= 6 && funnet; i++) {
+			if (arr[i-2] != i) {
+				funnet = false;
 			}
-			funnet = false;
 		}
-		if (sum == (2 + 3 + 4 + 5 + 6)) {
-			settInn(13, spillerNr, sum);
+
+		if (funnet) {
+			settInn(13, spillerNr, (2+3+4+5+6));
 		} else {
 			settInn(13, spillerNr, 0);
 		}
-
 	}
 
 	public void hus(int spillerNr, int[] arr) {
@@ -326,13 +321,24 @@ public class Poengtabell {
 	public int[] hentRad(int i) {
 		return yatzyTabell[i];
 	}
-	
+
 	public int[] hentSpillerPoeng(int spillerNr) {
 		int[] arr = new int[18];
-		for(int i = 0; i<18; i++) {
+		for (int i = 0; i < 18; i++) {
 			arr[i] = yatzyTabell[i][spillerNr];
 		}
 		return arr;
+	}
+	
+	public boolean sjekkYatzy(int[] arr) {
+		boolean sjekkYatzy = true;
+		
+		for(int i = 0; i<4; i++) {
+			if(arr[i] != arr[i+1]) {
+				sjekkYatzy = false;
+			}
+		}
+		return sjekkYatzy;
 	}
 
 }
