@@ -59,39 +59,34 @@ table, th, td {
 }
 
 .dicearea {
-	order: 1;
-	flex: 50%;
-	display: flex;
+	order: 2;
 	align-items:center;
 	background-color: DodgerBlue;
 }
 
 .spill{
 	flex-direction: row;
+
 }
 
 .top{
 	flex-direction: row;
+
 }
 
 .poengtabell {
-	order: 2;
-	display: flex;
-	flex: 50%;
+	order: 3;
 	background-color: green;
 }
 
 .header {
 	order: 1;
-	display: flex;
 	background-color: red;
 }
 
 .loggut {
-	order: 2; 
-	display : flex;
+	order: 4; 
 	background-color: yellow;
-	display: flex;
 }
 
 .flex-container {

@@ -12,13 +12,13 @@
 </head>
 <body>
 	<div class=flex-container>
-		<div class=top>
-			<div class="head">
+		
+			<div class=head>
 				<h2>Yatzy time!</h2>
 
 				<span class="melding"> ${loginMessage} </span>
 			</div>
-			<div class="loggut">
+			<div class=loggut>
 				<form method=post>
 					<fieldset>
 
@@ -26,11 +26,11 @@
 					</fieldset>
 				</form>
 			</div>
-		</div>
+		
 
 
-		<div class="spill">
-			<aside class="poengtabell">
+		<div class = spill>
+			<div class=poengtabell>
 				<table>
 					<tbody>
 						<tr>
@@ -218,9 +218,9 @@
 						</tr>
 					</tbody>
 				</table>
-			</aside>
+			</div>
 
-			<aside class="dicearea">
+			<div class=dicearea>
 				<form method="post">
 					<table>
 						<tr>
@@ -252,12 +252,11 @@
 					<button name="command" type="submit" value="trill">Trill</button>
 					<button name="command" type="submit" value="ferdig">Ferdig</button>
 				</form>
-			</aside>
+			</div>
 		</div>
 
+</div>
 
-
-	</div>
 
 </body>
 </html>
