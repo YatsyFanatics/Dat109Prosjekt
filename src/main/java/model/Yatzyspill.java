@@ -74,8 +74,7 @@ public class Yatzyspill {
 
 			if (poengtabell.sjekkYatzy(getTerningVerdier()) && !harYatzy(spillerSinTur)) {
 
-
-				poengtabell.yatzy(spillerSinTur,getTerningVerdier());
+				poengtabell.yatzy(spillerSinTur, getTerningVerdier());
 
 			} else {
 
@@ -90,11 +89,11 @@ public class Yatzyspill {
 		} else if (command.equalsIgnoreCase("trill") && antallKast == 0) {
 
 			resetTerninger();
-			
+
 			terningKast();
 		}
 	}
-	
+
 	public void resetTerninger() {
 		boolean[] boolArr = { false, false, false, false, false };
 
@@ -102,11 +101,11 @@ public class Yatzyspill {
 	}
 
 	public void oppdaterTerninger(boolean[] boolArr) {
-		for (int i = 0; i < terninger.length ; i++) {
+		for (int i = 0; i < terninger.length; i++) {
 			terninger[i].setKeep(boolArr[i]);
 		}
 	}
-	
+
 	private void nesteSpiller() {
 		// TODO sjekke om spiller er aktiv
 		spillerSinTur = (spillerSinTur + 1) % spillere.length;
@@ -121,20 +120,23 @@ public class Yatzyspill {
 
 		if (rundeNr == 6) {
 			for (int i = 0; i < spillere.length; i++) {
-				poengtabell.regnUt(i, rundeNr, getTerningVerdier());
+				if (!harYatzy(i)) {
+					poengtabell.regnUt(i, rundeNr, getTerningVerdier());
+				}
 			}
 			rundeNr = 8;
-		}
 
-		if (rundeNr == 16 && !harYatzy(spillerSinTur)) {
-
+		} else if (forrigeRunde == 6) {
+			for (int i = 0; i < spillere.length; i++) {
+				if (harYatzy(i)) {
+					poengtabell.regnUt(i, rundeNr, getTerningVerdier());
+				}
+			}
+		} else if (rundeNr == 16 && !harYatzy(spillerSinTur)) {
 
 			poengtabell.regnUt(spillerSinTur, rundeNr, getTerningVerdier());
 
-
-		}
-
-		if (rundeNr == 17) {
+		} else if (rundeNr == 17) {
 			for (int i = 0; i < spillere.length; i++) {
 				poengtabell.regnUt(i, rundeNr, getTerningVerdier());
 			}
