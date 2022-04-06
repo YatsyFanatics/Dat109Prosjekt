@@ -28,7 +28,7 @@
     </table>
     
     <span>
-        <input type="text" id="inputId">
+        <input type="text" id="inputId"></input>
         <button onclick="leggTilSpiller();">Legg til spiller</button>
     </span>
    
