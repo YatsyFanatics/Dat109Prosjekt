@@ -21,7 +21,7 @@ import model.Yatzyspill;
 public class SpillYatzyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	Yatzyspill yatzyspill = new Yatzyspill(); // placeholder
+//	Yatzyspill yatzyspill = new Yatzyspill(); // placeholder
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -35,6 +35,8 @@ public class SpillYatzyController extends HttpServlet {
 		 * 5; i++) { terninger[i] = trrr.nextInt(6) + 1; }
 		 */
 
+		Yatzyspill yatzyspill = (Yatzyspill) request.getAttribute("yatzyspill");
+		
 		int[] terninger = yatzyspill.getTerningVerdier();
 		request.setAttribute("dice1", terninger[0]);
 		request.setAttribute("dice2", terninger[1]);
@@ -66,6 +68,8 @@ public class SpillYatzyController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		Yatzyspill yatzyspill = (Yatzyspill) request.getAttribute("yatzyspill");
+		
 		// if(LoggInnUtil.erSpillerSinTur(yatzyspill.hentSpillerSinTur(), request)) {
 		boolean terning1;
 		if (request.getParameter("terning1") == null) {

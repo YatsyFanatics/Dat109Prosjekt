@@ -60,6 +60,21 @@ public class Yatzyspill {
 		spillere[5].setBrukernavn("Ulrik");
 	}
 	
+	public Yatzyspill(Bruker[] spillere) {
+		rundeNr = 0;
+		antallKast = 0;
+		spillerSinTur = 0;
+		poengtabell = new Poengtabell();
+		terninger = new Terning[5];
+		
+		for(int i = 0; i < ANTALLTERNINGER; i++) {
+			terninger[i] = new Terning();
+		}
+		
+		this.spillere = spillere;
+		admin = spillere[0];
+	}
+	
 	public void startSpill() {
 		//??
 	}
