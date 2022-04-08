@@ -126,7 +126,7 @@ public class Yatzyspill {
 			}
 			rundeNr = 8;
 
-		} else if (forrigeRunde == 6) {
+		} else if (rundeNr == 8 ) {
 			for (int i = 0; i < spillere.length; i++) {
 				if (harYatzy(i)) {
 					poengtabell.regnUt(i, rundeNr, getTerningVerdier());
@@ -162,7 +162,7 @@ public class Yatzyspill {
 
 	public void regnUtVinner() {
 		// TODO sjekk etter lik score og inaktive brukere
-		int[] totalScore = poengtabell.hentRad(17);
+		Integer[] totalScore = poengtabell.hentRad(17);
 		int vinnerScore = totalScore[0];
 		vinner = spillere[0];
 
@@ -256,7 +256,7 @@ public class Yatzyspill {
 		this.terninger = terninger;
 	}
 
-	public int[] hentSpillerPoeng(int spillerNr) {
+	public String[] hentSpillerPoeng(int spillerNr) {
 		return poengtabell.hentSpillerPoeng(spillerNr);
 	}
 
@@ -269,7 +269,6 @@ public class Yatzyspill {
 	}
 
 	public boolean harYatzy(int spillerNr) {
-
 		return poengtabell.hentVerdi(16, spillerNr) == 50;
 	}
 
