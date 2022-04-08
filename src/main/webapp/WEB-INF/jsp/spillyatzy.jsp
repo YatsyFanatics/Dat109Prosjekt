@@ -106,7 +106,13 @@
 							<td>${spiller6liste[5]}</td>
 						</tr>
 						<tr>
-			
+							<td><strong>SUM</strong></td>
+							<td>${spiller1liste[6]}</td>
+							<td>${spiller2liste[6]}</td>
+							<td>${spiller3liste[6]}</td>
+							<td>${spiller4liste[6]}</td>
+							<td>${spiller5liste[6]}</td>
+							<td>${spiller6liste[6]}</td>
 						</tr>
 						<tr>
 							<td><strong>BONUS</strong></td>
@@ -199,7 +205,13 @@
 							<td>${spiller6liste[16]}</td>
 						</tr>
 						<tr>
-
+							<td><strong>TOTAL</strong></td>
+							<td>${spiller1liste[17]}</td>
+							<td>${spiller2liste[17]}</td>
+							<td>${spiller3liste[17]}</td>
+							<td>${spiller4liste[17]}</td>
+							<td>${spiller5liste[17]}</td>
+							<td>${spiller6liste[17]}</td>
 						</tr>
 					</tbody>
 				</table>
