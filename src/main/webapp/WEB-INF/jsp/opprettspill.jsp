@@ -19,7 +19,7 @@
 		<fieldset>
 				<button type="submit">Start spill</button>
 		</fieldset>
-	
+	</form>
 
 </body>
 </html>

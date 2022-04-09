@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,12 +9,19 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "yatzyspill", schema = "oblig3")
-public class Yatzyspill {
+public class Yatzyspill implements Serializable{
 
-	private final int ANTALLTERNINGER = 5;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Transient
+	private static final int ANTALLTERNINGER = 5;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,13 +31,25 @@ public class Yatzyspill {
 	@JoinColumn(name = "admin")
 	private Bruker admin; 
 
+	@Transient
 	private int rundeNr;
+	
+	@Transient
 	private int spillerSinTur;
+	
+	@Transient
 	private Bruker vinner;
+	
+	@Transient
 	private Poengtabell poengtabell;
+	
+	@Transient
 	private int antallKast;
 	
+	@Transient
 	private Bruker[] spillere;
+	
+	@Transient
 	private Terning[] terninger;
 	
 	public Yatzyspill(int spillid, Bruker admin, Bruker[] spillere) {
@@ -39,6 +60,21 @@ public class Yatzyspill {
 		this.spillid = spillid;
 		this.admin = admin;
 		this.spillere = spillere;
+		terninger = new Terning[5];
+		
+		for(int i = 0; i < ANTALLTERNINGER; i++) {
+			terninger[i] = new Terning();
+		}
+	}
+	
+	public Yatzyspill( Bruker admin, Bruker[] spillere) {
+		rundeNr = 0;
+		antallKast = 0;
+		spillerSinTur = 0;
+		poengtabell = new Poengtabell(spillere.length);
+		this.admin = admin;
+		this.spillere = spillere;
+		terninger = new Terning[5];
 		
 		for(int i = 0; i < ANTALLTERNINGER; i++) {
 			terninger[i] = new Terning();

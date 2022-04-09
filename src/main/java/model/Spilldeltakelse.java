@@ -17,11 +17,11 @@ public class Spilldeltakelse {
 	private int spilldeltakelseid;
 	
 	@ManyToOne
-	@JoinColumn(name = "bruker")
+	@JoinColumn(name = "spillerid")
 	private Bruker spiller;
 	
 	@ManyToOne
-	@JoinColumn(name = "yatzyspill")
+	@JoinColumn(name = "spillid")
 	private Yatzyspill yatzyspill;
 	
 	public Spilldeltakelse() {	
