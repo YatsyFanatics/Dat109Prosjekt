@@ -3,6 +3,7 @@ package model;
 
 import java.io.Serializable;
 
+import javax.ejb.EJB;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +13,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import businessLogic.dao.RundeoversiktDAO;
+import businessLogic.dao.YatzyspillDAO;
+
 
 
 @Entity
@@ -19,6 +23,11 @@ import javax.persistence.Transient;
 public class Yatzyspill implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	
+	@EJB
+	@Transient
+	private RundeoversiktDAO rundeDAO;
+	
 
 	@Transient
 	private static final int ANTALLTERNINGER = 5;
@@ -59,7 +68,7 @@ public class Yatzyspill implements Serializable{
 		rundeNr = 0;
 		antallKast = 0;
 		spillerSinTur = 0;
-		poengtabell = new Poengtabell(spillere.length);
+		poengtabell = new Poengtabell();
 		this.spillid = spillid;
 		this.admin = admin;
 		this.spillere = spillere;
@@ -74,7 +83,7 @@ public class Yatzyspill implements Serializable{
 		rundeNr = 0;
 		antallKast = 0;
 		spillerSinTur = 0;
-		poengtabell = new Poengtabell(spillere.length);
+		poengtabell = new Poengtabell();
 		this.admin = admin;
 		this.spillere = spillere;
 		terninger = new Terning[5];
@@ -86,6 +95,8 @@ public class Yatzyspill implements Serializable{
 	}
 
 	public Yatzyspill() {
+		
+		
 		rundeNr = 0;
 		antallKast = 0;
 		spillerSinTur = 0;
@@ -100,6 +111,7 @@ public class Yatzyspill implements Serializable{
 		spillere = new Bruker[6];
 		spillere[0] = new Bruker();
 		spillere[0].setBrukernavn("Endre");
+		admin = spillere[0];
 		spillere[1] = new Bruker();
 		spillere[1].setBrukernavn("Alexander");
 		spillere[2] = new Bruker();
@@ -110,6 +122,8 @@ public class Yatzyspill implements Serializable{
 		spillere[4].setBrukernavn("Erik");
 		spillere[5] = new Bruker();
 		spillere[5].setBrukernavn("Ulrik");
+		
+		
 	}
 
 	public void startSpill() {
@@ -126,13 +140,20 @@ public class Yatzyspill implements Serializable{
 			if (poengtabell.sjekkYatzy(getTerningVerdier()) && !harYatzy(spillerSinTur)) {
 
 				poengtabell.yatzy(spillerSinTur, getTerningVerdier());
+				
+				rundeDAO.nyRundeOversikt(new Rundeoversikt(16,spillid,poengtabell.hentRad(16)));
 
 			} else {
 
 				if (harYatzy(spillerSinTur)) {
 					poengtabell.regnUt(spillerSinTur, forrigeRunde, getTerningVerdier());
+				rundeDAO.oppdater(new Rundeoversikt(forrigeRunde,spillid,poengtabell.hentRad(forrigeRunde)));
 				} else {
 					poengtabell.regnUt(spillerSinTur, rundeNr, getTerningVerdier());
+					Rundeoversikt ro = new Rundeoversikt(rundeNr,spillid,poengtabell.hentRad(0));
+					System.out.print(ro.toString());
+					rundeDAO.nyRundeOversikt(ro);
+
 				}
 			}
 			resetTerninger();

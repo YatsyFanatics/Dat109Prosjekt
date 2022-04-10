@@ -10,9 +10,9 @@ import model.Yatzyspill;
 
 public class RundeKey implements Serializable{
 
-	public RundeKey(int rundenr, Yatzyspill yatzyspill) {
+	public RundeKey(int rundenr, Integer yatzyspill) {
 		this.rundenr = rundenr;
-		this.yatzyspill = yatzyspill.getSpillid();
+		this.spillid = yatzyspill;
 	}
 
 	private static final long serialVersionUID = 1L;
@@ -24,5 +24,5 @@ public class RundeKey implements Serializable{
 	@Id
 	@ManyToOne
 	@JoinColumn(name = "spillid")
-	private Integer yatzyspill;
+	private Integer spillid;
 }

@@ -14,7 +14,7 @@ import businessLogic.dao.RundeKey;
 @Entity
 @Table(name = "rundeoversikt", schema = "oblig3")
 @IdClass(RundeKey.class)
-public class Rundeoversikt implements Serializable{
+public class Rundeoversikt implements Serializable {
 
 	/**
 	 * 
@@ -24,10 +24,10 @@ public class Rundeoversikt implements Serializable{
 	public Rundeoversikt() {
 	}
 
-	public Rundeoversikt(int rundenr, Yatzyspill yatzyspill, Integer spiller1score, Integer spiller2score,
+	public Rundeoversikt(int rundenr, Integer yatzyspill, Integer spiller1score, Integer spiller2score,
 			Integer spiller3score, Integer spiller4score, Integer spiller5score, Integer spiller6score) {
 		this.rundenr = rundenr;
-		this.yatzyspill = yatzyspill;
+		this.spillid = yatzyspill;
 		this.spiller1score = spiller1score;
 		this.spiller2score = spiller2score;
 		this.spiller3score = spiller3score;
@@ -35,16 +35,32 @@ public class Rundeoversikt implements Serializable{
 		this.spiller5score = spiller5score;
 		this.spiller6score = spiller6score;
 	}
-	
-	public Rundeoversikt(int rundenr, Yatzyspill yatzyspill, Integer[] terningArray) {
+
+	public Rundeoversikt(int rundenr, Integer yatzyspill, Integer[] terningArray) {
 		this.rundenr = rundenr;
-		this.yatzyspill = yatzyspill;
-		this.spiller1score = terningArray[0];
-		this.spiller2score = terningArray[1];
-		this.spiller3score = terningArray[2];
-		this.spiller4score = terningArray[3];
-		this.spiller5score = terningArray[4];
-		this.spiller6score = terningArray[5];
+		this.spillid = yatzyspill;
+		if (terningArray != null) {
+			if(terningArray[0] != null) {
+			this.spiller1score = terningArray[0];
+			}
+			if(terningArray[1] != null) {
+			this.spiller2score = terningArray[1];}
+			if(terningArray[2] != null) {
+			this.spiller3score = terningArray[2];}
+			if(terningArray[3] != null) {
+			this.spiller4score = terningArray[3];}
+			if(terningArray[4] != null) {
+			this.spiller5score = terningArray[4];}
+			if(terningArray[5] != null) {
+			this.spiller6score = terningArray[5];}
+		} else {
+			this.spiller1score = null;
+			this.spiller2score = null;
+			this.spiller3score = null;
+			this.spiller4score = null;
+			this.spiller5score = null;
+			this.spiller6score = null;
+		}
 	}
 
 	@Id
@@ -52,9 +68,8 @@ public class Rundeoversikt implements Serializable{
 	private int rundenr;
 
 	@Id
-	@ManyToOne
 	@JoinColumn(name = "spillid")
-	private Yatzyspill yatzyspill;
+	private Integer spillid;
 
 	@JoinColumn(name = "spiller1score")
 	private Integer spiller1score;
@@ -82,12 +97,12 @@ public class Rundeoversikt implements Serializable{
 		this.rundenr = rundenr;
 	}
 
-	public Yatzyspill getYatzyspill() {
-		return yatzyspill;
+	public Integer getYatzyspill() {
+		return spillid;
 	}
 
-	public void setYatzyspill(Yatzyspill yatzyspill) {
-		this.yatzyspill = yatzyspill;
+	public void setYatzyspill(Integer yatzyspill) {
+		this.spillid = yatzyspill;
 	}
 
 	public int getSpiller1score() {
@@ -136,6 +151,13 @@ public class Rundeoversikt implements Serializable{
 
 	public void setSpiller6score(int spiller5score) {
 		this.spiller5score = spiller5score;
+	}
+
+	@Override
+	public String toString() {
+		return "Rundeoversikt [rundenr=" + rundenr + ", spillid=" + spillid + ", spiller1score=" + spiller1score
+				+ ", spiller2score=" + spiller2score + ", spiller3score=" + spiller3score + ", spiller4score="
+				+ spiller4score + ", spiller5score=" + spiller5score + ", spiller6score=" + spiller6score + "]";
 	}
 
 }
