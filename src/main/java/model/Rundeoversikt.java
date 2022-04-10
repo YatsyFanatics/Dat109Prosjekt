@@ -35,6 +35,17 @@ public class Rundeoversikt implements Serializable{
 		this.spiller5score = spiller5score;
 		this.spiller6score = spiller6score;
 	}
+	
+	public Rundeoversikt(int rundenr, Yatzyspill yatzyspill, Integer[] terningArray) {
+		this.rundenr = rundenr;
+		this.yatzyspill = yatzyspill;
+		this.spiller1score = terningArray[0];
+		this.spiller2score = terningArray[1];
+		this.spiller3score = terningArray[2];
+		this.spiller4score = terningArray[3];
+		this.spiller5score = terningArray[4];
+		this.spiller6score = terningArray[5];
+	}
 
 	@Id
 	@JoinColumn(name = "rundenr")
