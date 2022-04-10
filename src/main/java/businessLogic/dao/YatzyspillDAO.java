@@ -1,6 +1,7 @@
 package businessLogic.dao;
 
 import javax.ejb.Stateless;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -21,7 +22,7 @@ public class YatzyspillDAO {
 		return em.find(Yatzyspill.class, spillid);
 	}
 	
-	//Usikker på hvilke av de under det faktisk er behov for.
+	//Usikker pï¿½ hvilke av de under det faktisk er behov for.
 	
 	public Bruker getAdmin(String spillid) {
 		return getSpill(spillid).getAdmin();

@@ -2,12 +2,15 @@ package presentation.spillside;
 
 import java.io.IOException;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import businessLogic.dao.RundeoversiktDAO;
+import model.Rundeoversikt;
 import model.Yatzyspill;
 
 /**
@@ -16,6 +19,9 @@ import model.Yatzyspill;
 @WebServlet(name = "SpillYatzyController", urlPatterns = "/spillyatzy")
 public class SpillYatzyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	@EJB
+	private RundeoversiktDAO rundeDAO;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -43,13 +49,15 @@ public class SpillYatzyController extends HttpServlet {
 
 	}
 
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+	
 		Yatzyspill yatzyspill = (Yatzyspill) request.getSession().getAttribute("yatzyspill");
 		
 		// if(LoggInnUtil.erSpillerSinTur(yatzyspill.hentSpillerSinTur(), request)) {
@@ -85,10 +93,18 @@ public class SpillYatzyController extends HttpServlet {
 		}
 
 		boolean[] terningTilstander = { terning1, terning2, terning3, terning4, terning5 };
-		yatzyspill.spillTur(request.getParameter("command"), terningTilstander);
-		// }
+		if(yatzyspill.spillTur(request.getParameter("command"), terningTilstander)) {
+
+			Rundeoversikt ro = new Rundeoversikt(yatzyspill.getRundeNr(),yatzyspill.getSpillid(),yatzyspill.getPoengtabell().hentRad(0));
+			
+			System.out.print(rundeDAO.toString());
+		
+			rundeDAO.nyRundeOversikt(ro);
+		}
 
 		doGet(request, response);
 	}
+
+
 
 }

@@ -1,6 +1,5 @@
 package model;
 
-
 import java.io.Serializable;
 
 import javax.ejb.EJB;
@@ -18,13 +17,14 @@ import businessLogic.dao.YatzyspillDAO;
 
 @Entity
 @Table(name = "yatzyspill", schema = "oblig3")
-public class Yatzyspill implements Serializable{
+public class Yatzyspill implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	@EJB
-	@Transient
-	private RundeoversiktDAO rundeDAO;
-	
+
+	/*
+	 * @EJB
+	 * 
+	 * @Transient private RundeoversiktDAO rundeDAO;
+	 */
 	@Transient
 	private static final int ANTALLTERNINGER = 5;
 
@@ -34,29 +34,29 @@ public class Yatzyspill implements Serializable{
 
 	@OneToOne
 	@JoinColumn(name = "admin")
-	private Bruker admin; 
+	private Bruker admin;
 
 	@Transient
 	private int rundeNr;
-	
+
 	@Transient
 	private int forrigeRunde;
-	
+
 	@Transient
 	private int spillerSinTur;
-	
+
 	@Transient
 	private Bruker vinner;
 
 	@Transient
 	private Poengtabell poengtabell;
-	
+
 	@Transient
 	private int antallKast;
-	
+
 	@Transient
 	private Bruker[] spillere;
-	
+
 	@Transient
 	private Terning[] terninger;
 
@@ -69,31 +69,33 @@ public class Yatzyspill implements Serializable{
 		this.admin = admin;
 		this.spillere = spillere;
 		terninger = new Terning[5];
-		
-		for(int i = 0; i < ANTALLTERNINGER; i++) {
+
+		for (int i = 0; i < ANTALLTERNINGER; i++) {
 			terninger[i] = new Terning();
 		}
 	}
-	
+
 	public Yatzyspill(Bruker[] spillere) {
 		rundeNr = 0;
 		antallKast = 0;
 		spillerSinTur = 0;
 		poengtabell = new Poengtabell();
 		terninger = new Terning[5];
-		
-		for(int i = 0; i < ANTALLTERNINGER; i++) {
+
+		for (int i = 0; i < ANTALLTERNINGER; i++) {
 			terninger[i] = new Terning();
 		}
-		
+
 		this.spillere = spillere;
 		admin = spillere[0];
 	}
-	
-	public Yatzyspill() {			
+
+	public Yatzyspill() {
 	}
 
-	public void spillTur(String command, boolean[] terningTilstand) {
+	public boolean spillTur(String command, boolean[] terningTilstand) {
+		boolean oppdater = false;
+
 		if (command.equalsIgnoreCase("trill") && antallKast < 3 && antallKast > 0) {
 			oppdaterTerninger(terningTilstand);
 			terningKast();
@@ -103,21 +105,23 @@ public class Yatzyspill implements Serializable{
 			if (poengtabell.sjekkYatzy(getTerningVerdier()) && !harYatzy(spillerSinTur)) {
 
 				poengtabell.yatzy(spillerSinTur, getTerningVerdier());
-				
-				rundeDAO.nyRundeOversikt(new Rundeoversikt(16,spillid,poengtabell.hentRad(16)));
+
+//				rundeDAO.nyRundeOversikt(new Rundeoversikt(16,spillid,poengtabell.hentRad(16)));
 
 			} else {
 
 				if (harYatzy(spillerSinTur)) {
 					poengtabell.regnUt(spillerSinTur, forrigeRunde, getTerningVerdier());
-				rundeDAO.oppdater(new Rundeoversikt(forrigeRunde,spillid,poengtabell.hentRad(forrigeRunde)));
+//				rundeDAO.oppdater(new Rundeoversikt(forrigeRunde,spillid,poengtabell.hentRad(forrigeRunde)));
 				} else {
 					poengtabell.regnUt(spillerSinTur, rundeNr, getTerningVerdier());
-					Rundeoversikt ro = new Rundeoversikt(rundeNr,spillid,poengtabell.hentRad(0));
-					System.out.print(ro.toString());
-					rundeDAO.nyRundeOversikt(ro);
-
+//					Rundeoversikt ro = new Rundeoversikt(rundeNr,spillid,poengtabell.hentRad(rundeNr));
+//					System.out.print(ro.toString());
+//					rundeDAO.nyRundeOversikt(ro);
+//					poengtabell.persistRad(spillid, rundeNr);
+					oppdater = true;
 				}
+
 			}
 			resetTerninger();
 			nesteSpiller();
@@ -127,6 +131,7 @@ public class Yatzyspill implements Serializable{
 
 			terningKast();
 		}
+		return oppdater;
 	}
 
 	public void resetTerninger() {
@@ -161,7 +166,7 @@ public class Yatzyspill implements Serializable{
 			}
 			rundeNr = 8;
 
-		} else if (rundeNr == 8 ) {
+		} else if (rundeNr == 8) {
 			for (int i = 0; i < spillere.length; i++) {
 				if (harYatzy(i)) {
 					poengtabell.regnUt(i, rundeNr, getTerningVerdier());
@@ -188,11 +193,11 @@ public class Yatzyspill implements Serializable{
 	}
 
 	public void kick() {
-		//TODO
+		// TODO
 	}
 
 	public void purre() {
-		//TODO
+		// TODO
 	}
 
 	public void regnUtVinner() {

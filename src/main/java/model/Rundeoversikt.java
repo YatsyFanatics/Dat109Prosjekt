@@ -37,22 +37,28 @@ public class Rundeoversikt implements Serializable {
 	}
 
 	public Rundeoversikt(int rundenr, Integer yatzyspill, Integer[] terningArray) {
+
 		this.rundenr = rundenr;
 		this.spillid = yatzyspill;
 		if (terningArray != null) {
-			if(terningArray[0] != null) {
-			this.spiller1score = terningArray[0];
+			if (terningArray[0] != null) {
+				this.spiller1score = terningArray[0];
 			}
-			if(terningArray[1] != null) {
-			this.spiller2score = terningArray[1];}
-			if(terningArray[2] != null) {
-			this.spiller3score = terningArray[2];}
-			if(terningArray[3] != null) {
-			this.spiller4score = terningArray[3];}
-			if(terningArray[4] != null) {
-			this.spiller5score = terningArray[4];}
-			if(terningArray[5] != null) {
-			this.spiller6score = terningArray[5];}
+			if (terningArray[1] != null) {
+				this.spiller2score = terningArray[1];
+			}
+			if (terningArray[2] != null) {
+				this.spiller3score = terningArray[2];
+			}
+			if (terningArray[3] != null) {
+				this.spiller4score = terningArray[3];
+			}
+			if (terningArray[4] != null) {
+				this.spiller5score = terningArray[4];
+			}
+			if (terningArray[5] != null) {
+				this.spiller6score = terningArray[5];
+			}
 		} else {
 			this.spiller1score = null;
 			this.spiller2score = null;

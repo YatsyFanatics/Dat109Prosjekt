@@ -2,7 +2,15 @@ package model;
 
 import java.util.Arrays;
 
+import javax.ejb.EJB;
+import javax.persistence.Transient;
+
+import businessLogic.dao.RundeoversiktDAO;
+
 public class Poengtabell {
+
+	@EJB
+	private RundeoversiktDAO rundeDAO;
 
 	public final static int bonusGrense = 42;
 	public final static int bonusPoeng = 50;
@@ -309,9 +317,9 @@ public class Poengtabell {
 	}
 
 	public int hentVerdi(int radNr, int spillerNr) {
-		if(yatzyTabell[radNr][spillerNr] != null) {
-		return  yatzyTabell[radNr][spillerNr];
-		}else {
+		if (yatzyTabell[radNr][spillerNr] != null) {
+			return yatzyTabell[radNr][spillerNr];
+		} else {
 			return 0;
 		}
 	}
@@ -349,6 +357,13 @@ public class Poengtabell {
 			}
 		}
 		return sjekkYatzy;
+	}
+
+	public void persistRad(int spillID, int rundeNr) {
+		Rundeoversikt ro = new Rundeoversikt(rundeNr, spillID, hentRad(rundeNr));
+		System.out.print(ro.toString());
+		System.out.print(rundeDAO.toString());
+		rundeDAO.nyRundeOversikt(ro);
 	}
 
 }

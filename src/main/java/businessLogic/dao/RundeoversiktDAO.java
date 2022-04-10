@@ -5,7 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import model.Rundeoversikt;
-import model.Yatzyspill;
+
 
 @Stateless
 public class RundeoversiktDAO {
@@ -15,12 +15,12 @@ public class RundeoversiktDAO {
 
 	public void nyRundeOversikt(Rundeoversikt rundeoversikt) {
 		
-		//if (!rundeFinnes(rundeoversikt)) {
+		if (!rundeFinnes(rundeoversikt)) {
 			em.persist(rundeoversikt);
-		/*} else {
+		} else {
 			oppdater(rundeoversikt);
 		}
-		*/
+		
 	}
 	
 	public void oppdater(Rundeoversikt rundeoversikt) {
