@@ -62,7 +62,6 @@ public class OpprettspillController extends HttpServlet {
 				if (spillere == null) {
 					spillere = new ArrayList<>();
 				}
-				System.out.println(spillere.size());
 				spillere.add(nySpiller);
 				request.getSession().setAttribute("spillerListe", spillere);
 				request.getSession().setAttribute("oppdatertListe", true);
