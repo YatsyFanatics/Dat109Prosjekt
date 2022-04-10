@@ -10,6 +10,7 @@
 <title>Logg inn</title>
 </head>
 <body>
+<div class="flex-container">
     <h2>Logg inn</h2>
     <span class="melding"> ${loginMessage} </span>
 
@@ -23,5 +24,7 @@
         </fieldset>
     </form>
     <a href="opprettbruker"><button>Opprett bruker</button></a>
+    
+    </div>
 </body>
 </html>
