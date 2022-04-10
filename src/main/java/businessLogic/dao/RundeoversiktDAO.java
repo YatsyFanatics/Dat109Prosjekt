@@ -14,11 +14,13 @@ public class RundeoversiktDAO {
 	private EntityManager em;
 
 	public void nyRundeOversikt(Rundeoversikt rundeoversikt) {
-//		if (!rundeFinnes(rundeoversikt)) {
+		
+		//if (!rundeFinnes(rundeoversikt)) {
 			em.persist(rundeoversikt);
-//		} else {
-//			oppdater(rundeoversikt);
-//		}
+		/*} else {
+			oppdater(rundeoversikt);
+		}
+		*/
 	}
 	
 	public void oppdater(Rundeoversikt rundeoversikt) {
@@ -26,7 +28,8 @@ public class RundeoversiktDAO {
 	}
 
 	public Rundeoversikt getrundeoversikt(Rundeoversikt rundeoversikt) {
-		return em.find(Rundeoversikt.class, rundeoversikt);
+		RundeKey rk = new RundeKey(rundeoversikt.getRundenr(),rundeoversikt.getYatzyspill());
+		return em.find(Rundeoversikt.class, rk);
 	}
 
 	public boolean rundeFinnes(Rundeoversikt rundeoversikt) {
