@@ -1,11 +1,11 @@
-package main.java.model.test;
+package model.test;
 
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import static org.junit.Assert.assertEquals;
 
-//Får ikke testet om alt dette funker da Intellij hater klassestrukturen som dere har laget
+//Fï¿½r ikke testet om alt dette funker da Intellij hater klassestrukturen som dere har laget
 public class SpillTest {
 
        /* Yatzyspill yatzyspill;

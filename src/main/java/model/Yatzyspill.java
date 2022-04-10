@@ -12,24 +12,19 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+
+
 @Entity
 @Table(name = "yatzyspill", schema = "oblig3")
 public class Yatzyspill implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-
-import javax.persistence.Id;
-
-public class Yatzyspill {
-
 
 	@Transient
 	private static final int ANTALLTERNINGER = 5;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int spillid;
 
 	@OneToOne
@@ -41,7 +36,8 @@ public class Yatzyspill {
 	
 	@Transient
 	private int forrigeRunde;
-	private Bruker admin; // mulig vi m� lagre admin som String for brukeren sin id/brukernavn
+	
+	@Transient
 	private int spillerSinTur;
 	
 	@Transient
