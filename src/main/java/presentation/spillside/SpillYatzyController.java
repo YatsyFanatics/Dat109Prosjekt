@@ -2,16 +2,12 @@ package presentation.spillside;
 
 import java.io.IOException;
 
-
-import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import businessLogic.dao.BrukerDAO;
-import businessLogic.utils.LoggInnUtil;
 import model.Yatzyspill;
 
 /**
@@ -33,15 +29,15 @@ public class SpillYatzyController extends HttpServlet {
 		request.setAttribute("dice4", terninger[3]);
 		request.setAttribute("dice5", terninger[4]);
 		
-		request.setAttribute("antallkast", yatzyspill.getAntallKast());
-		
-		request.setAttribute("spillerListe", yatzyspill.hentSpillereString());
-		
+		request.setAttribute("antallkast", yatzyspill.getAntallKast());	
+		request.setAttribute("spillerListe", yatzyspill.hentSpillereString());		
 		request.setAttribute("spillerSinTur", yatzyspill.getSpillerSinTur());		
 		
 		for(int i = 0; i < yatzyspill.getSpillere().length; i++) {
 			request.setAttribute(("spiller" + (i+1) + "liste"), yatzyspill.hentSpillerPoeng(i));
 		}
+		
+		request.setAttribute("terningStatus", yatzyspill.terningStatus());
 
 		request.getRequestDispatcher("WEB-INF/jsp/spillyatzy.jsp").forward(request, response);
 
