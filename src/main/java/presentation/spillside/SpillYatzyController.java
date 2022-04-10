@@ -22,9 +22,12 @@ public class SpillYatzyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	Yatzyspill yatzyspill = new Yatzyspill(); // placeholder
+	
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		TODO hent terninger fra spillet som kj�rer
 //		int[] terninger = yatzyspill.getTerningVerdier();
@@ -41,21 +44,6 @@ public class SpillYatzyController extends HttpServlet {
 		request.setAttribute("dice3", terninger[2]);
 		request.setAttribute("dice4", terninger[3]);
 		request.setAttribute("dice5", terninger[4]);
-		
-		request.setAttribute("antallkast", yatzyspill.getAntallKast());
-		
-		request.setAttribute("spillerListe", yatzyspill.hentSpillereString());
-		
-		request.setAttribute("spillerSinTur", yatzyspill.getSpillerSinTur());
-		
-		request.setAttribute("spiller1liste", yatzyspill.hentSpillerPoeng(0));
-		request.setAttribute("spiller2liste", yatzyspill.hentSpillerPoeng(1));
-		request.setAttribute("spiller3liste", yatzyspill.hentSpillerPoeng(2));
-		request.setAttribute("spiller4liste", yatzyspill.hentSpillerPoeng(3));
-		request.setAttribute("spiller5liste", yatzyspill.hentSpillerPoeng(4));
-		request.setAttribute("spiller6liste", yatzyspill.hentSpillerPoeng(5));
-		
-		request.setAttribute("terningStatus", yatzyspill.terningStatus());
 
 		request.getRequestDispatcher("WEB-INF/jsp/spillyatzy.jsp").forward(request, response);
 
@@ -70,6 +58,7 @@ public class SpillYatzyController extends HttpServlet {
 
 		// if(LoggInnUtil.erSpillerSinTur(yatzyspill.hentSpillerSinTur(), request)) {
 		boolean terning1;
+		System.out.println(request.getParameter("terning1"));
 		if (request.getParameter("terning1") == null) {
 			terning1 = false;
 		} else {

@@ -1,6 +1,5 @@
 package model;
 
-
 import java.io.Serializable;
 
 import javax.persistence.Entity;
@@ -21,15 +20,11 @@ public class Yatzyspill implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-import javax.persistence.Id;
-
-public class Yatzyspill {
-
-
 	@Transient
 	private static final int ANTALLTERNINGER = 5;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int spillid;
 
 	@OneToOne
@@ -40,8 +35,6 @@ public class Yatzyspill {
 	private int rundeNr;
 	
 	@Transient
-	private int forrigeRunde;
-	private Bruker admin; // mulig vi m� lagre admin som String for brukeren sin id/brukernavn
 	private int spillerSinTur;
 	
 	@Transient
@@ -58,7 +51,7 @@ public class Yatzyspill {
 	
 	@Transient
 	private Terning[] terninger;
-
+	
 	public Yatzyspill(int spillid, Bruker admin, Bruker[] spillere) {
 		rundeNr = 0;
 		antallKast = 0;
@@ -84,11 +77,10 @@ public class Yatzyspill {
 		terninger = new Terning[5];
 		
 		for(int i = 0; i < ANTALLTERNINGER; i++) {
-
 			terninger[i] = new Terning();
 		}
 	}
-
+	
 	public Yatzyspill() {
 		rundeNr = 0;
 		antallKast = 0;
@@ -96,146 +88,95 @@ public class Yatzyspill {
 
 		poengtabell = new Poengtabell();
 		terninger = new Terning[5];
-
-		for (int i = 0; i < ANTALLTERNINGER; i++) {
+		
+		for(int i = 0; i < ANTALLTERNINGER; i++) {
 			terninger[i] = new Terning();
 		}
-
-		spillere = new Bruker[6];
+		
+		spillere = new Bruker[2];
 		spillere[0] = new Bruker();
-		spillere[0].setBrukernavn("Endre");
 		spillere[1] = new Bruker();
-		spillere[1].setBrukernavn("Alexander");
-		spillere[2] = new Bruker();
-		spillere[2].setBrukernavn("Jurgen");
-		spillere[3] = new Bruker();
-		spillere[3].setBrukernavn("Eivind");
-		spillere[4] = new Bruker();
-		spillere[4].setBrukernavn("Erik");
-		spillere[5] = new Bruker();
-		spillere[5].setBrukernavn("Ulrik");
 	}
-
+	
 	public void startSpill() {
-		// ??
+		//??
 	}
-
+	
 	public void spillTur(String command, boolean[] terningTilstand) {
-		if (command.equalsIgnoreCase("trill") && antallKast < 3 && antallKast > 0) {
-			oppdaterTerninger(terningTilstand);
-			terningKast();
-		} else if (command.equalsIgnoreCase("ferdig") && antallKast > 0) {
+		if(command.equalsIgnoreCase("trill") && antallKast < 3) {
+			terningKast(terningTilstand);
+		}else if(command.equalsIgnoreCase("ferdig")) {
 			antallKast = 0;
-
-			if (poengtabell.sjekkYatzy(getTerningVerdier()) && !harYatzy(spillerSinTur)) {
-
-				poengtabell.yatzy(spillerSinTur, getTerningVerdier());
-
-			} else {
-
-				if (harYatzy(spillerSinTur)) {
-					poengtabell.regnUt(spillerSinTur, forrigeRunde, getTerningVerdier());
-				} else {
-					poengtabell.regnUt(spillerSinTur, rundeNr, getTerningVerdier());
-				}
-			}
-			resetTerninger();
+			//TODO rundeNr - 1 om spilleren har hatt yatzy
+			poengtabell.regnUt(getSpillerSinTur(), getRundeNr(), getTerningVerdier());
 			nesteSpiller();
-		} else if (command.equalsIgnoreCase("trill") && antallKast == 0) {
-
-			resetTerninger();
-
-			terningKast();
 		}
 	}
-
-	public void resetTerninger() {
-		boolean[] boolArr = { false, false, false, false, false };
-
-		oppdaterTerninger(boolArr);
-	}
-
-	public void oppdaterTerninger(boolean[] boolArr) {
-		for (int i = 0; i < terninger.length; i++) {
-			terninger[i].setKeep(boolArr[i]);
-		}
-	}
-
+	
 	private void nesteSpiller() {
-		// TODO sjekke om spiller er aktiv
-		spillerSinTur = (spillerSinTur + 1) % spillere.length;
+		//TODO sjekke om spiller er aktiv
+		spillerSinTur = (spillerSinTur+1) % spillere.length;
 		nesteRunde();
 	}
 
 	private void nesteRunde() {
-		if (spillerSinTur == 0) {
-			forrigeRunde = rundeNr;
+		if(spillerSinTur == 0) {
 			rundeNr++;
 		}
-
-		if (rundeNr == 6) {
-			for (int i = 0; i < spillere.length; i++) {
-				if (!harYatzy(i)) {
-					poengtabell.regnUt(i, rundeNr, getTerningVerdier());
-				}
+		
+		if(rundeNr == 6) {
+			for(int i = 0; i < spillere.length; i++) {
+				poengtabell.regnUt(i, rundeNr, getTerningVerdier());
 			}
 			rundeNr = 8;
-
-		} else if (rundeNr == 8 ) {
-			for (int i = 0; i < spillere.length; i++) {
-				if (harYatzy(i)) {
-					poengtabell.regnUt(i, rundeNr, getTerningVerdier());
-				}
-			}
-		} else if (rundeNr == 16 && !harYatzy(spillerSinTur)) {
-
-			poengtabell.regnUt(spillerSinTur, rundeNr, getTerningVerdier());
-
-		} else if (rundeNr == 17) {
-			for (int i = 0; i < spillere.length; i++) {
+		}
+		
+		if(rundeNr == 17) {
+			for(int i = 0; i < spillere.length; i++) {
 				poengtabell.regnUt(i, rundeNr, getTerningVerdier());
 			}
 			regnUtVinner();
 		}
 	}
 
-	public void terningKast() {
-		for (Terning t : terninger) {
-			t.trill();
+	public void terningKast(boolean[] terningTilstand) {
+		for(int i = 0; i < terninger.length; i++) {
+			if(!terningTilstand[i]) {
+				terninger[i].trill();
+			}
 		}
-
+		
 		antallKast++;
 	}
-
+	
 	public void kick() {
-
+		
 	}
-
+	
 	public void purre() {
-
+		
 	}
-
+	
 	public void regnUtVinner() {
-		// TODO sjekk etter lik score og inaktive brukere
-		Integer[] totalScore = poengtabell.hentRad(17);
+		//TODO sjekk etter lik score og inaktive brukere
+		int[] totalScore = poengtabell.hentRad(17);
 		int vinnerScore = totalScore[0];
-		vinner = spillere[0];
-
-		for (int i = 1; i < totalScore.length; i++) {
-			if (totalScore[i] > vinnerScore) {
+		vinner = spillere[0];	
+		
+		for(int i = 1; i < totalScore.length; i++) {
+			if(totalScore[i] > vinnerScore) {
 				vinnerScore = totalScore[i];
 				vinner = spillere[i];
 			}
 		}
 	}
-
+	
 	public Bruker hentSpillerSinTur() {
 		return spillere[getSpillerSinTur()];
 	}
-
+	
 	public int[] getTerningVerdier() {
-		int[] verdier = { terninger[0].getVerdi(), terninger[1].getVerdi(), terninger[2].getVerdi(),
-				terninger[3].getVerdi(), terninger[4].getVerdi() };
+		int[] verdier = {terninger[0].getVerdi(), terninger[1].getVerdi(), terninger[2].getVerdi(), terninger[3].getVerdi(), terninger[4].getVerdi()};
 		return verdier;
 	}
 
@@ -309,27 +250,5 @@ public class Yatzyspill {
 
 	public void setTerninger(Terning[] terninger) {
 		this.terninger = terninger;
-	}
-
-	public String[] hentSpillerPoeng(int spillerNr) {
-		return poengtabell.hentSpillerPoeng(spillerNr);
-	}
-
-	public String[] hentSpillereString() {
-		String[] s = new String[spillere.length];
-		for (int i = 0; i < spillere.length; i++) {
-			s[i] = spillere[i].getBrukernavn();
-		}
-		return s;
-	}
-
-	public boolean harYatzy(int spillerNr) {
-		return poengtabell.hentVerdi(16, spillerNr) == 50;
-	}
-
-	public boolean[] terningStatus() {
-		boolean[] keeper = { terninger[0].isKeeping(), terninger[1].isKeeping(), terninger[2].isKeeping(),
-				terninger[3].isKeeping(), terninger[4].isKeeping() };
-		return keeper;
 	}
 }

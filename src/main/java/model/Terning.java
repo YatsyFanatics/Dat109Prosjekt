@@ -11,15 +11,11 @@ public class Terning {
 	}
 	
 	public void trill(double seed) {
-		if(!keep) {
 		this.verdi = (int) Math.floor(((seed)*6)+1);
-		}
 	}
 	
 	public void trill() {
-		if(!keep) {
 		this.verdi = (int) Math.floor(((Math.random())*6)+1);
-		}
 	}
 	
 	public int getVerdi() {

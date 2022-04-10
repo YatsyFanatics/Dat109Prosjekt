@@ -1,21 +1,19 @@
 package model;
 
-import java.util.Arrays;
-
 public class Poengtabell {
 
 	public final static int bonusGrense = 42;
 	public final static int bonusPoeng = 50;
 	public final static int yatzyPoeng = 50;
 
-	Integer[][] yatzyTabell;
+	int[][] yatzyTabell;
 
 	public Poengtabell() {
-		yatzyTabell = new Integer[18][6];
+		yatzyTabell = new int[18][6];
 	}
 
 	public Poengtabell(int antallSpillere) {
-		yatzyTabell = new Integer[18][antallSpillere];
+		yatzyTabell = new int[18][antallSpillere];
 	}
 
 	public void regnUt(int spillerNr, int radNr, int[] arr) {
@@ -48,11 +46,11 @@ public class Poengtabell {
 		case 6:
 			sum(spillerNr);
 			break;
-
+			
 //		case 7:
 //			bonus();
 //			break;
-
+			
 		case 8:
 			ettPar(spillerNr, arr);
 			break;
@@ -86,7 +84,7 @@ public class Poengtabell {
 			break;
 
 		case 16:
-			yatzy(spillerNr, arr);
+			yatzy(spillerNr); // yatzy forutsetter sjekk gjort i spill klassen, kan diskuteres
 			break;
 
 		case 17:
@@ -204,16 +202,19 @@ public class Poengtabell {
 	}
 
 	public void litenStright(int spillerNr, int[] arr) {
-		boolean funnet = true;
-		Arrays.sort(arr);
-		for (int i = 1; i <= 5 && funnet; i++) {
-			if (arr[i - 1] != i) {
-				funnet = false;
+		int sum = 0;
+		boolean funnet = false;
+		for (int i = 1; i <= 5; i++) {
+			for (int n = 1; n <= 5 && !funnet; n++) {
+				if (i == n) {
+					sum += n;
+					funnet = true;
+				}
 			}
+			funnet = false;
 		}
-
-		if (funnet) {
-			settInn(12, spillerNr, (1 + 2 + 3 + 4 + 5));
+		if (sum == (1 + 2 + 3 + 4 + 5)) {
+			settInn(12, spillerNr, sum);
 		} else {
 			settInn(12, spillerNr, 0);
 		}
@@ -221,19 +222,23 @@ public class Poengtabell {
 	}
 
 	public void storStright(int spillerNr, int[] arr) {
-		boolean funnet = true;
-		Arrays.sort(arr);
-		for (int i = 2; i <= 6 && funnet; i++) {
-			if (arr[i - 2] != i) {
-				funnet = false;
+		int sum = 0;
+		boolean funnet = false;
+		for (int i = 2; i <= 6; i++) {
+			for (int n = 2; n <= 6 && !funnet; n++) {
+				if (i == n) {
+					sum += i;
+					funnet = true;
+				}
 			}
+			funnet = false;
 		}
-
-		if (funnet) {
-			settInn(13, spillerNr, (2 + 3 + 4 + 5 + 6));
+		if (sum == (2 + 3 + 4 + 5 + 6)) {
+			settInn(13, spillerNr, sum);
 		} else {
 			settInn(13, spillerNr, 0);
 		}
+
 	}
 
 	public void hus(int spillerNr, int[] arr) {
@@ -276,12 +281,8 @@ public class Poengtabell {
 
 	}
 
-	public void yatzy(int spillerNr, int[] arr) {
-		if (sjekkYatzy(arr)) {
-			settInn(16, spillerNr, yatzyPoeng);
-		} else {
-			settInn(16, spillerNr, 0);
-		}
+	public void yatzy(int spillerNr) {
+		settInn(16, spillerNr, yatzyPoeng);
 	}
 
 	public void total(int spillerNr) {
@@ -309,11 +310,7 @@ public class Poengtabell {
 	}
 
 	public int hentVerdi(int radNr, int spillerNr) {
-		if(yatzyTabell[radNr][spillerNr] != null) {
-		return  yatzyTabell[radNr][spillerNr];
-		}else {
-			return 0;
-		}
+		return yatzyTabell[radNr][spillerNr];
 	}
 
 	private int antallLike(int verdi, int[] arr) {
@@ -326,29 +323,8 @@ public class Poengtabell {
 		return antallForekomster;
 	}
 
-	public Integer[] hentRad(int i) {
+	public int[] hentRad(int i) {
 		return yatzyTabell[i];
-	}
-
-	public String[] hentSpillerPoeng(int spillerNr) {
-		String[] arr = new String[18];
-		for (int i = 0; i < 18; i++) {
-			if (yatzyTabell[i][spillerNr] != null) {
-				arr[i] = yatzyTabell[i][spillerNr].toString();
-			}
-		}
-		return arr;
-	}
-
-	public boolean sjekkYatzy(int[] arr) {
-		boolean sjekkYatzy = true;
-
-		for (int i = 0; i < 4; i++) {
-			if (arr[i] != arr[i + 1]) {
-				sjekkYatzy = false;
-			}
-		}
-		return sjekkYatzy;
 	}
 
 }

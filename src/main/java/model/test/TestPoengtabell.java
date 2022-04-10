@@ -48,7 +48,7 @@ public class TestPoengtabell {
 		int[] arr10 = { 6, 6, 6, 3, 6 };
 		tabellen.fireLike(0, arr10);
 		
-		int[] arr11 = { 5, 2, 3, 4, 1 };
+		int[] arr11 = { 1, 2, 3, 4, 5 };
 		tabellen.litenStright(0, arr11);
 		
 		int[] arr12 = { 6, 2, 3, 4, 5 };
@@ -60,8 +60,7 @@ public class TestPoengtabell {
 		int[] arr14 = { 3, 3, 4, 2, 6 };
 		tabellen.sjanse(0, arr14);
 		
-		int[] arr15 = { 1, 1, 1, 1, 1 };
-		tabellen.yatzy(0,arr15);
+		tabellen.yatzy(0);
 		
 		tabellen.total(0);
 
