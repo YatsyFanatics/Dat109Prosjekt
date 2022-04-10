@@ -36,11 +36,10 @@ create table yatzyspill
 
 create table spilldeltakelse
 (
-    spilldeltakelseid serial not null,
     spillid serial not null,
     spillerid varchar not null,
 
-    constraint spilldeltakelse_pk primary key (spilldeltakelseid),
+    constraint spilldeltakelse_pk primary key (spillid, spillerid),
 
     constraint spillid_fk foreign key (spillid)
     references Oblig3.yatzyspill (spillid) match simple,

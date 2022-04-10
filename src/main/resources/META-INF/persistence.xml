@@ -12,6 +12,7 @@
         <class>model.Yatzyspill</class>
         <class>model.Spilldeltakelse</class>
         <class>model.Rundeoversikt</class>
+
         
         <properties>
             <property name="eclipselink.weaving" value="false" />
