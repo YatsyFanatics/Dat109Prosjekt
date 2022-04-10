@@ -317,4 +317,12 @@ public class Yatzyspill implements Serializable {
 				terninger[3].isKeeping(), terninger[4].isKeeping() };
 		return keeper;
 	}
+
+	public int getForrigeRunde() {
+		return forrigeRunde;
+	}
+
+	public void setForrigeRunde(int forrigeRunde) {
+		this.forrigeRunde = forrigeRunde;
+	}
 }
