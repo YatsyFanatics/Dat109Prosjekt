@@ -11,6 +11,7 @@
 <title>Opprett bruker</title>
 </head>
 <body>
+<div class="flex-container">
 	<h2>Opprett bruker</h2>
 	<span class="melding">
 		${loginMessage}
@@ -68,6 +69,6 @@
         </fieldset>
     </form>
 
-
+</div>
 </body>
 </html>
