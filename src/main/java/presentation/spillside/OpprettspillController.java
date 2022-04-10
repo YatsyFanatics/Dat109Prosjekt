@@ -37,20 +37,15 @@ public class OpprettspillController extends HttpServlet {
 	@EJB
 	private RundeoversiktDAO rundeDAO;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 
 		request.getRequestDispatcher("WEB-INF/jsp/opprettspill.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -92,6 +87,8 @@ public class OpprettspillController extends HttpServlet {
 		rundeDAO.oppdater(rundeOS3);
 
 		response.sendRedirect("spillyatzy");
+
+
 	}
 
 }
