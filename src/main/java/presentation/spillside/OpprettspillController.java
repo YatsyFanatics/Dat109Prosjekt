@@ -21,9 +21,7 @@ public class OpprettspillController extends HttpServlet {
 
 	@EJB
 	private BrukerDAO bdao;
-
 	private ArrayList<Bruker> spillere;
-//	private final int MAXSPILLERE = 6;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -51,7 +49,7 @@ public class OpprettspillController extends HttpServlet {
 				}
 				System.out.println(spillere.size());
 				spillere.add(nySpiller);
-//				request.setAttribute("spillerListe", spillere);
+
 				request.getSession().setAttribute("spillerListe", spillere);
 				request.getSession().setAttribute("oppdatertListe", true);
 			} //else bruker finnes ikke???
@@ -65,24 +63,6 @@ public class OpprettspillController extends HttpServlet {
 			Yatzyspill yatzyspill = new Yatzyspill(spillere.toArray(new Bruker[spillere.size()]));
 			request.getSession().setAttribute("yatzyspill", yatzyspill);
 			response.sendRedirect("spillyatzy");
-		}
-		
-//		int antallSpillere = MAXSPILLERE;
-//		for(int i = 1; i < MAXSPILLERE; i++) {
-//			if(request.getParameter("spiller" + i) == null) {
-//				antallSpillere = i;
-//				break;
-//			}
-//		}
-//		Bruker[] spillere = new Bruker[antallSpillere];
-//		spillere[0] = (Bruker) request.getAttribute("admin");
-//		for(int i = 1; i < antallSpillere; i++) {
-//			spillere[i] = new Bruker();
-//			spillere[i].setBrukernavn(request.getParameter("spiller" + i));
-//		}
-//		Yatzyspill yatzyspill = new Yatzyspill(spillere);
-//		request.setAttribute("yatzyspill", yatzyspill);
-//		response.sendRedirect("spillyatzy");
+		}		
 	}
-
 }

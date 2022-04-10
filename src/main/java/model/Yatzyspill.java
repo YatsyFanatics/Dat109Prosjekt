@@ -6,16 +6,15 @@ public class Yatzyspill {
 
 	private final int ANTALLTERNINGER = 5;
 	
-//	@Id
 	private int spillid;
 	private int rundeNr;
-	private Bruker admin; //mulig vi m� lagre admin som String for brukeren sin id/brukernavn
+	private Bruker admin; 
 	private int spillerSinTur;
 	private Bruker vinner;
 	private Poengtabell poengtabell;
 	private int antallKast;
 	
-	//one to many eller noe s�nt
+
 	private Bruker[] spillere;
 	private Terning[] terninger;
 	
