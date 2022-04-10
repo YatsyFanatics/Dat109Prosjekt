@@ -1,6 +1,7 @@
 package presentation.spillside;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -9,86 +10,81 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import businessLogic.dao.BrukerDAO;
-import businessLogic.dao.RundeoversiktDAO;
+import model.Bruker;
+import model.Yatzyspill;
+import model.Spilldeltakelse;
+
 import businessLogic.dao.SpilldeltakelseDAO;
 import businessLogic.dao.YatzyspillDAO;
-import model.Bruker;
-import model.Rundeoversikt;
-import model.Spilldeltakelse;
-import model.Yatzyspill;
+import businessLogic.dao.BrukerDAO;
+import businessLogic.utils.LoggInnUtil;
 
 /**
  * Servlet implementation class Opprettspill
  */
-@WebServlet(name = "OpprettspillServlet", urlPatterns = "/opprettspill")
+@WebServlet(name = "OpprettspillController", urlPatterns = "/opprettspill")
 public class OpprettspillController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@EJB
-	private BrukerDAO brukerDAO;
-
+	private BrukerDAO bdao;
 	@EJB
 	private YatzyspillDAO spillDAO;
-	
 	@EJB
 	private SpilldeltakelseDAO spillDeltakerDAO;
-	
-	@EJB
-	private RundeoversiktDAO rundeDAO;
 
+	private ArrayList<Bruker> spillere;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		if (LoggInnUtil.erInnlogget(request)) {
+			if (request.getSession().getAttribute("oppdatertListe") == null) {
+				spillere = new ArrayList<Bruker>();
+				request.getSession().setAttribute("spillerListe", spillere);
+			}
+			Bruker admin = LoggInnUtil.innloggetBruker(request);
+			request.setAttribute("admin", admin.getBrukernavn());
+			request.getRequestDispatcher("WEB-INF/jsp/opprettspill.jsp").forward(request, response);
+		}
 
-		request.getRequestDispatcher("WEB-INF/jsp/opprettspill.jsp").forward(request, response);
+		response.sendRedirect("index");
+
 	}
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws ServletException, IOException {	
+		
+		if (request.getParameter("command").equals("spiller")) {
+			if (!bdao.erLedig(request.getParameter("nySpiller"))) {
+				Bruker nySpiller = bdao.getBruker(request.getParameter("nySpiller"));
+				spillere = (ArrayList<Bruker>) request.getSession().getAttribute("spillerListe");
+				if (spillere == null) {
+					spillere = new ArrayList<>();
+				}
+				System.out.println(spillere.size());
+				spillere.add(nySpiller);
+				request.getSession().setAttribute("spillerListe", spillere);
+				request.getSession().setAttribute("oppdatertListe", true);
+			} // else bruker finnes ikke???
 
-		Bruker admin = new Bruker("endre", "endre", "ros", "hei@hade.ru", "pass");
-
-		Bruker tufs = new Bruker("eivind", "eivind", "myx", "deg@hade.ru", "pass");
-
-		if (!brukerDAO.nyBruker(admin)) {
-			admin = brukerDAO.getBruker("endre");
+			doGet(request, response);
 		}
 
-		if (brukerDAO.nyBruker(tufs)) {
-			tufs = brukerDAO.getBruker("eivind");
+		if (request.getParameter("command").equals("start")) {
+			spillere = (ArrayList<Bruker>) request.getSession().getAttribute("spillerListe");
+			spillere.add(0, LoggInnUtil.innloggetBruker(request));
+			Yatzyspill yatzyspill = new Yatzyspill(spillere.toArray(new Bruker[spillere.size()]));
+			spillDAO.nyttSpill(yatzyspill);
+			
+			for(Bruker b: spillere) {
+				Spilldeltakelse sd = new Spilldeltakelse(b, yatzyspill);
+				spillDeltakerDAO.nySpilldeltakelse(sd);
+			}
+			
+			request.getSession().setAttribute("yatzyspill", yatzyspill);
+			response.sendRedirect("spillyatzy");
 		}
-
-		Bruker[] spillere = { admin, tufs };
-
-		Yatzyspill nyttSpill = new Yatzyspill(admin, spillere);
-
-		spillDAO.nyttSpill(nyttSpill);
-		
-		Spilldeltakelse sd1 = new Spilldeltakelse(admin,nyttSpill);
-		Spilldeltakelse sd2 = new Spilldeltakelse(tufs,nyttSpill);
-		
-		spillDeltakerDAO.nySpilldeltakelse(sd1);
-		spillDeltakerDAO.nySpilldeltakelse(sd2);
-		
-		
-		Rundeoversikt rundeOS1 = new Rundeoversikt(0, nyttSpill, 3, 1, null, null, null,null);
-		
-		Rundeoversikt rundeOS2 = new Rundeoversikt(1, nyttSpill, 8, 6, null, null, null, null);
-		
-		Rundeoversikt rundeOS3 = new Rundeoversikt(0, nyttSpill, 3, 5, null, null, null,null);
-		
-		rundeDAO.nyRundeOversikt(rundeOS1);
-		
-		rundeDAO.nyRundeOversikt(rundeOS2);
-		
-		rundeDAO.oppdater(rundeOS3);
-
-		response.sendRedirect("spillyatzy");
-
 
 	}
-
 }

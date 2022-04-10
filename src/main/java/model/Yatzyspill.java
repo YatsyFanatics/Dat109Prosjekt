@@ -16,19 +16,15 @@ import javax.persistence.Transient;
 import businessLogic.dao.RundeoversiktDAO;
 import businessLogic.dao.YatzyspillDAO;
 
-
-
 @Entity
 @Table(name = "yatzyspill", schema = "oblig3")
 public class Yatzyspill implements Serializable{
-
 	private static final long serialVersionUID = 1L;
 	
 	@EJB
 	@Transient
 	private RundeoversiktDAO rundeDAO;
 	
-
 	@Transient
 	private static final int ANTALLTERNINGER = 5;
 
@@ -51,7 +47,7 @@ public class Yatzyspill implements Serializable{
 	
 	@Transient
 	private Bruker vinner;
-	
+
 	@Transient
 	private Poengtabell poengtabell;
 	
@@ -79,55 +75,22 @@ public class Yatzyspill implements Serializable{
 		}
 	}
 	
-	public Yatzyspill( Bruker admin, Bruker[] spillere) {
+	public Yatzyspill(Bruker[] spillere) {
 		rundeNr = 0;
 		antallKast = 0;
 		spillerSinTur = 0;
 		poengtabell = new Poengtabell();
-		this.admin = admin;
-		this.spillere = spillere;
 		terninger = new Terning[5];
 		
 		for(int i = 0; i < ANTALLTERNINGER; i++) {
-
 			terninger[i] = new Terning();
 		}
-	}
-
-	public Yatzyspill() {
 		
-		
-		rundeNr = 0;
-		antallKast = 0;
-		spillerSinTur = 0;
-
-		poengtabell = new Poengtabell();
-		terninger = new Terning[5];
-
-		for (int i = 0; i < ANTALLTERNINGER; i++) {
-			terninger[i] = new Terning();
-		}
-
-		spillere = new Bruker[6];
-		spillere[0] = new Bruker();
-		spillere[0].setBrukernavn("Endre");
+		this.spillere = spillere;
 		admin = spillere[0];
-		spillere[1] = new Bruker();
-		spillere[1].setBrukernavn("Alexander");
-		spillere[2] = new Bruker();
-		spillere[2].setBrukernavn("Jurgen");
-		spillere[3] = new Bruker();
-		spillere[3].setBrukernavn("Eivind");
-		spillere[4] = new Bruker();
-		spillere[4].setBrukernavn("Erik");
-		spillere[5] = new Bruker();
-		spillere[5].setBrukernavn("Ulrik");
-		
-		
 	}
-
-	public void startSpill() {
-		// ??
+	
+	public Yatzyspill() {			
 	}
 
 	public void spillTur(String command, boolean[] terningTilstand) {
@@ -225,11 +188,11 @@ public class Yatzyspill implements Serializable{
 	}
 
 	public void kick() {
-
+		//TODO
 	}
 
 	public void purre() {
-
+		//TODO
 	}
 
 	public void regnUtVinner() {

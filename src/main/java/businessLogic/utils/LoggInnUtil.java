@@ -25,6 +25,10 @@ public class LoggInnUtil {
 		sesjon.setAttribute("bruker", bruker);
 	}
 	
+	public static Bruker innloggetBruker(HttpServletRequest request) {	
+		return (Bruker) request.getSession().getAttribute("bruker");
+	}
+	
 	public static boolean erSpillerSinTur(Bruker bruker, HttpServletRequest request) {
 		return bruker.equals(request.getSession().getAttribute("bruker"));
 	}
