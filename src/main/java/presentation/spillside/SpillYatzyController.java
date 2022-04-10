@@ -19,7 +19,7 @@ import model.Yatzyspill;
 @WebServlet(name = "SpillYatzyController", urlPatterns = "/spillyatzy")
 public class SpillYatzyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	@EJB
 	private RundeoversiktDAO rundeDAO;
 
@@ -27,28 +27,27 @@ public class SpillYatzyController extends HttpServlet {
 			throws ServletException, IOException {
 
 		Yatzyspill yatzyspill = (Yatzyspill) request.getSession().getAttribute("yatzyspill");
-		
+
 		int[] terninger = yatzyspill.getTerningVerdier();
 		request.setAttribute("dice1", terninger[0]);
 		request.setAttribute("dice2", terninger[1]);
 		request.setAttribute("dice3", terninger[2]);
 		request.setAttribute("dice4", terninger[3]);
 		request.setAttribute("dice5", terninger[4]);
-		
-		request.setAttribute("antallkast", yatzyspill.getAntallKast());	
-		request.setAttribute("spillerListe", yatzyspill.hentSpillereString());		
-		request.setAttribute("spillerSinTur", yatzyspill.getSpillerSinTur());		
-		
-		for(int i = 0; i < yatzyspill.getSpillere().length; i++) {
-			request.setAttribute(("spiller" + (i+1) + "liste"), yatzyspill.hentSpillerPoeng(i));
+
+		request.setAttribute("antallkast", yatzyspill.getAntallKast());
+		request.setAttribute("spillerListe", yatzyspill.hentSpillereString());
+		request.setAttribute("spillerSinTur", yatzyspill.getSpillerSinTur());
+
+		for (int i = 0; i < yatzyspill.getSpillere().length; i++) {
+			request.setAttribute(("spiller" + (i + 1) + "liste"), yatzyspill.hentSpillerPoeng(i));
 		}
-		
+
 		request.setAttribute("terningStatus", yatzyspill.terningStatus());
 
 		request.getRequestDispatcher("WEB-INF/jsp/spillyatzy.jsp").forward(request, response);
 
 	}
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -56,10 +55,9 @@ public class SpillYatzyController extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-	
+
 		Yatzyspill yatzyspill = (Yatzyspill) request.getSession().getAttribute("yatzyspill");
-		
+
 		// if(LoggInnUtil.erSpillerSinTur(yatzyspill.hentSpillerSinTur(), request)) {
 		boolean terning1;
 		if (request.getParameter("terning1") == null) {
@@ -93,18 +91,17 @@ public class SpillYatzyController extends HttpServlet {
 		}
 
 		boolean[] terningTilstander = { terning1, terning2, terning3, terning4, terning5 };
-		if(yatzyspill.spillTur(request.getParameter("command"), terningTilstander)) {
+		if (yatzyspill.spillTur(request.getParameter("command"), terningTilstander)) {
 
-			Rundeoversikt ro = new Rundeoversikt(yatzyspill.getRundeNr(),yatzyspill.getSpillid(),yatzyspill.getPoengtabell().hentRad(0));
-			
+			Rundeoversikt ro = new Rundeoversikt(yatzyspill.getRundeNr(), yatzyspill.getSpillid(),
+					yatzyspill.getPoengtabell().hentRad(0));
+
 			System.out.print(rundeDAO.toString());
-		
+
 			rundeDAO.nyRundeOversikt(ro);
 		}
 
 		doGet(request, response);
 	}
-
-
 
 }
