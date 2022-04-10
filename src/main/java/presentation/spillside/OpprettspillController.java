@@ -1,13 +1,16 @@
 package presentation.spillside;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import businessLogic.dao.BrukerDAO;
 import businessLogic.utils.LoggInnUtil;
 import model.Bruker;
 import model.Yatzyspill;
@@ -16,14 +19,19 @@ import model.Yatzyspill;
 public class OpprettspillController extends HttpServlet {
 	private static final long serialVersionUID = 1L;    
 
-//	@EJB
-//	private BrukerDAO bdao;
+	@EJB
+	private BrukerDAO bdao;
 
-	private final int MAXSPILLERE = 6;
+	private ArrayList<Bruker> spillere;
+//	private final int MAXSPILLERE = 6;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		if(LoggInnUtil.erInnlogget(request)) {
+			if(request.getSession().getAttribute("oppdatertListe") == null) {
+				spillere = new ArrayList<Bruker>();
+				request.getSession().setAttribute("spillerListe", spillere);
+			}
 			Bruker admin = LoggInnUtil.innloggetBruker(request);
 			request.setAttribute("admin", admin.getBrukernavn());
 			request.getRequestDispatcher("WEB-INF/jsp/opprettspill.jsp").forward(request, response);
@@ -34,22 +42,47 @@ public class OpprettspillController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int antallSpillere = MAXSPILLERE;
-		for(int i = 1; i < MAXSPILLERE; i++) {
-			if(request.getParameter("spiller" + i) == null) {
-				antallSpillere = i;
-				break;
-			}
+		if(request.getParameter("command").equals("spiller")) {
+			if(!bdao.erLedig(request.getParameter("nySpiller"))) {
+				Bruker nySpiller = bdao.getBruker(request.getParameter("nySpiller"));
+				spillere = (ArrayList<Bruker>) request.getSession().getAttribute("spillerListe");
+				if(spillere == null) {
+					spillere = new ArrayList<>();
+				}
+				System.out.println(spillere.size());
+				spillere.add(nySpiller);
+//				request.setAttribute("spillerListe", spillere);
+				request.getSession().setAttribute("spillerListe", spillere);
+				request.getSession().setAttribute("oppdatertListe", true);
+			} //else bruker finnes ikke???
+			
+			doGet(request, response);
 		}
-		Bruker[] spillere = new Bruker[antallSpillere];
-		spillere[0] = (Bruker) request.getAttribute("admin");
-		for(int i = 1; i < antallSpillere; i++) {
-			spillere[i] = new Bruker();
-			spillere[i].setBrukernavn(request.getParameter("spiller" + i));
+		
+		if(request.getParameter("command").equals("start")) {
+			spillere = (ArrayList<Bruker>) request.getSession().getAttribute("spillerListe");
+			spillere.add(0, LoggInnUtil.innloggetBruker(request));
+			Yatzyspill yatzyspill = new Yatzyspill(spillere.toArray(new Bruker[spillere.size()]));
+			request.getSession().setAttribute("yatzyspill", yatzyspill);
+			response.sendRedirect("spillyatzy");
 		}
-		Yatzyspill yatzyspill = new Yatzyspill(spillere);
-		request.setAttribute("yatzyspill", yatzyspill);
-		response.sendRedirect("spillyatzy");
+		
+//		int antallSpillere = MAXSPILLERE;
+//		for(int i = 1; i < MAXSPILLERE; i++) {
+//			if(request.getParameter("spiller" + i) == null) {
+//				antallSpillere = i;
+//				break;
+//			}
+//		}
+//		Bruker[] spillere = new Bruker[antallSpillere];
+//		spillere[0] = (Bruker) request.getAttribute("admin");
+//		for(int i = 1; i < antallSpillere; i++) {
+//			spillere[i] = new Bruker();
+//			spillere[i].setBrukernavn(request.getParameter("spiller" + i));
+//		}
+//		Yatzyspill yatzyspill = new Yatzyspill(spillere);
+//		request.setAttribute("yatzyspill", yatzyspill);
+//		response.sendRedirect("spillyatzy");
 	}
 
 }

@@ -64,7 +64,7 @@ public class Yatzyspill {
 		rundeNr = 0;
 		antallKast = 0;
 		spillerSinTur = 0;
-		poengtabell = new Poengtabell();
+		poengtabell = new Poengtabell(spillere.length);
 		terninger = new Terning[5];
 		
 		for(int i = 0; i < ANTALLTERNINGER; i++) {

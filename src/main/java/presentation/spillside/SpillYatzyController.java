@@ -35,7 +35,7 @@ public class SpillYatzyController extends HttpServlet {
 		 * 5; i++) { terninger[i] = trrr.nextInt(6) + 1; }
 		 */
 
-		Yatzyspill yatzyspill = (Yatzyspill) request.getAttribute("yatzyspill");
+		Yatzyspill yatzyspill = (Yatzyspill) request.getSession().getAttribute("yatzyspill");
 		
 		int[] terninger = yatzyspill.getTerningVerdier();
 		request.setAttribute("dice1", terninger[0]);
@@ -50,12 +50,16 @@ public class SpillYatzyController extends HttpServlet {
 		
 		request.setAttribute("spillerSinTur", yatzyspill.getSpillerSinTur());
 		
-		request.setAttribute("spiller1liste", yatzyspill.hentSpillerPoeng(0));
-		request.setAttribute("spiller2liste", yatzyspill.hentSpillerPoeng(1));
-		request.setAttribute("spiller3liste", yatzyspill.hentSpillerPoeng(2));
-		request.setAttribute("spiller4liste", yatzyspill.hentSpillerPoeng(3));
-		request.setAttribute("spiller5liste", yatzyspill.hentSpillerPoeng(4));
-		request.setAttribute("spiller6liste", yatzyspill.hentSpillerPoeng(5));
+//		request.setAttribute("spiller1liste", yatzyspill.hentSpillerPoeng(0));
+//		request.setAttribute("spiller2liste", yatzyspill.hentSpillerPoeng(1));
+//		request.setAttribute("spiller3liste", yatzyspill.hentSpillerPoeng(2));
+//		request.setAttribute("spiller4liste", yatzyspill.hentSpillerPoeng(3));
+//		request.setAttribute("spiller5liste", yatzyspill.hentSpillerPoeng(4));
+//		request.setAttribute("spiller6liste", yatzyspill.hentSpillerPoeng(5));
+		
+		for(int i = 0; i < yatzyspill.getSpillere().length; i++) {
+			request.setAttribute(("spiller" + (i+1) + "liste"), yatzyspill.hentSpillerPoeng(i));
+		}
 
 		request.getRequestDispatcher("WEB-INF/jsp/spillyatzy.jsp").forward(request, response);
 
@@ -68,7 +72,7 @@ public class SpillYatzyController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		Yatzyspill yatzyspill = (Yatzyspill) request.getAttribute("yatzyspill");
+		Yatzyspill yatzyspill = (Yatzyspill) request.getSession().getAttribute("yatzyspill");
 		
 		// if(LoggInnUtil.erSpillerSinTur(yatzyspill.hentSpillerSinTur(), request)) {
 		boolean terning1;

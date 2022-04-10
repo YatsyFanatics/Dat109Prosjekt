@@ -1,10 +1,10 @@
 "use strict";
 
 class OpprettSpill{
-    tabell;
-    rad;
-    kol;
-    textnode;
+//    tabell;
+//    rad;
+//    kol;
+//    textnode;
     
     constructor(rootEl) {
         this.root = rootEl;
@@ -14,21 +14,23 @@ class OpprettSpill{
     }
     
     leggTilSpiller(){
-    this.tabell = document.getElementsByTagName("tabell").item(0);
-    this.rad = document.createElement("tr");
-    this.kol = document.createElement("td");
-    this.textnode = document.createTextNode(document.getElementById("inputId").nodeValue);
-    this.kol.appendChild(textnode);
-    this.rad.appendChild(kol);
-    this.tabell.appendChild(rad);       
+        console.log("fant den");
+        let tabell = document.getElementById("tabell");
+/*        let input = document.getElementById("inputId").innerHTML;*/
+        let textnode = document.createTextNode(document.getElementById("inputId").childNodes[0].textContent);
+        let nyRad = tabell.insertRow();
+        let nyKol = nyRad.insertCell();
+        nyKol.appendChild(textnode);   
     }  
 }
 
 //function leggTilSpiller(){
-//    tabell = document.getElementsByTagName("tabell").item(0);
-//    rad = document.createElement("tr");
-//    kol = document.createElement("td");
-//    textnode = document.createTextNode(document.getElementById("inputId").nodeValue);
+//    console.log("fant den");
+//    let tabell = document.getElementById("tabell");
+///*    tabell = document.getElementsByTagName("tabell").item(0);*/
+//    let rad = document.createElement("tr");
+//    let kol = document.createElement("td");
+//    let textnode = document.createTextNode(document.getElementById("inputId").nodeValue);
 //    kol.appendChild(textnode);
 //    rad.appendChild(kol);
 //    tabell.appendChild(rad);       
