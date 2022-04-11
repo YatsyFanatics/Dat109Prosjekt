@@ -2,7 +2,6 @@ package model;
 
 import java.io.Serializable;
 
-import javax.ejb.EJB;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,19 +11,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import businessLogic.dao.RundeoversiktDAO;
-import businessLogic.dao.YatzyspillDAO;
-
 @Entity
 @Table(name = "yatzyspill", schema = "oblig3")
 public class Yatzyspill implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	/*
-	 * @EJB
-	 * 
-	 * @Transient private RundeoversiktDAO rundeDAO;
-	 */
 	@Transient
 	private static final int ANTALLTERNINGER = 5;
 
@@ -103,22 +94,14 @@ public class Yatzyspill implements Serializable {
 			antallKast = 0;
 
 			if (poengtabell.sjekkYatzy(getTerningVerdier()) && !harYatzy(spillerSinTur)) {
-
 				poengtabell.yatzy(spillerSinTur, getTerningVerdier());
 
-//				rundeDAO.nyRundeOversikt(new Rundeoversikt(16,spillid,poengtabell.hentRad(16)));
-
 			} else {
-
 				if (harYatzy(spillerSinTur)) {
 					poengtabell.regnUt(spillerSinTur, forrigeRunde, getTerningVerdier());
-//				rundeDAO.oppdater(new Rundeoversikt(forrigeRunde,spillid,poengtabell.hentRad(forrigeRunde)));
+
 				} else {
 					poengtabell.regnUt(spillerSinTur, rundeNr, getTerningVerdier());
-//					Rundeoversikt ro = new Rundeoversikt(rundeNr,spillid,poengtabell.hentRad(rundeNr));
-//					System.out.print(ro.toString());
-//					rundeDAO.nyRundeOversikt(ro);
-//					poengtabell.persistRad(spillid, rundeNr);
 					oppdater = true;
 				}
 

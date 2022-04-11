@@ -3,7 +3,6 @@ package model;
 import java.util.Arrays;
 
 import javax.ejb.EJB;
-import javax.persistence.Transient;
 
 import businessLogic.dao.RundeoversiktDAO;
 
@@ -184,6 +183,8 @@ public class Poengtabell {
 		}
 		if (toPar) {
 			settInn(9, spillerNr, sum);
+		} else {
+			settInn(9,spillerNr, 0);
 		}
 	}
 

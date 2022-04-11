@@ -13,7 +13,6 @@
 	<h2>Yatzy Fanatics</h2>
 	<a href="opprettbruker"><button>Opprett bruker</button></a><br>
     <a href="logginn"><button>Logg inn</button></a>
-<a href="spillyatzy"><button>test</button></a>
 </div>
 </body>
 </html>

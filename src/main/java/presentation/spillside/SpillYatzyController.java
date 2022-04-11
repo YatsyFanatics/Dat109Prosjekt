@@ -56,6 +56,12 @@ public class SpillYatzyController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+//		if (request.getParameter("ragequit") == "true") {
+//			response.sendRedirect("loggut");
+//		} else {
+			
+//		}
+		
 		Yatzyspill yatzyspill = (Yatzyspill) request.getSession().getAttribute("yatzyspill");
 
 		// if(LoggInnUtil.erSpillerSinTur(yatzyspill.hentSpillerSinTur(), request)) {
