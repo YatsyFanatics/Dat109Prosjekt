@@ -59,36 +59,11 @@ public class SpillYatzyController extends HttpServlet {
 		Yatzyspill yatzyspill = (Yatzyspill) request.getSession().getAttribute("yatzyspill");
 
 		// if(LoggInnUtil.erSpillerSinTur(yatzyspill.hentSpillerSinTur(), request)) {
-		boolean terning1;
-		if (request.getParameter("terning1") == null) {
-			terning1 = false;
-		} else {
-			terning1 = true;
-		}
-		boolean terning2;
-		if (request.getParameter("terning2") == null) {
-			terning2 = false;
-		} else {
-			terning2 = true;
-		}
-		boolean terning3;
-		if (request.getParameter("terning3") == null) {
-			terning3 = false;
-		} else {
-			terning3 = true;
-		}
-		boolean terning4;
-		if (request.getParameter("terning4") == null) {
-			terning4 = false;
-		} else {
-			terning4 = true;
-		}
-		boolean terning5;
-		if (request.getParameter("terning5") == null) {
-			terning5 = false;
-		} else {
-			terning5 = true;
-		}
+		boolean terning1 = request.getParameter("terning1") != null;
+		boolean terning2 = request.getParameter("terning2") != null;
+		boolean terning3 = request.getParameter("terning3") != null;
+		boolean terning4 = request.getParameter("terning4") != null;
+		boolean terning5 = request.getParameter("terning5") != null;
 
 		boolean[] terningTilstander = { terning1, terning2, terning3, terning4, terning5 };
 		if (yatzyspill.spillTur(request.getParameter("command"), terningTilstander)) {
