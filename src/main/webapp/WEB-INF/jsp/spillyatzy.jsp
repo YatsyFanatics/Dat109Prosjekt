@@ -21,7 +21,6 @@
 
 		<div class="loggut">
 			<form method=post>
-                <button>Logg ut</button>
 				<!-- <button name="ragequit" type="submit" value="true">Logg ut</button> -->
 			</form>
 		</div>
