@@ -161,7 +161,7 @@ public class Yatzyspill implements Serializable {
 		if (rundeNr == 6) {
 			for (int i = 0; i < spillere.length; i++) {
 				if (!harYatzy(i)) {
-					poengtabell.regnUt(i, rundeNr, getTerningVerdier());
+					poengtabell.regnUt(i, forrigeRunde, getTerningVerdier());
 				}
 			}
 			rundeNr = 8;
