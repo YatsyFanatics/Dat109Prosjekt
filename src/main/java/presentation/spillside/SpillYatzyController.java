@@ -66,14 +66,17 @@ public class SpillYatzyController extends HttpServlet {
 		boolean terning5 = request.getParameter("terning5") != null;
 
 		boolean[] terningTilstander = { terning1, terning2, terning3, terning4, terning5 };
-		if (yatzyspill.spillTur(request.getParameter("command"), terningTilstander)) {
+		yatzyspill.spillTur(request.getParameter("command"), terningTilstander);
+		if (yatzyspill.isOppdater()) {
 
-			Rundeoversikt ro = new Rundeoversikt(yatzyspill.getRundeNr(), yatzyspill.getSpillid(),
-					yatzyspill.getPoengtabell().hentRad(0));
+			Rundeoversikt ro1 = new Rundeoversikt(yatzyspill.getRundeNr(), yatzyspill.getSpillid(),
+					yatzyspill.getPoengtabell().hentRad(yatzyspill.getRundeNr()));
+			Rundeoversikt ro2 = new Rundeoversikt(yatzyspill.getRundeNr(), yatzyspill.getSpillid(),
+					yatzyspill.getPoengtabell().hentRad(yatzyspill.getForrigeRunde()));
 
-			System.out.print(rundeDAO.toString());
-
-			rundeDAO.nyRundeOversikt(ro);
+			rundeDAO.nyRundeOversikt(ro1);
+			rundeDAO.nyRundeOversikt(ro2);
+			yatzyspill.setOppdater(false);
 		}
 
 		doGet(request, response);

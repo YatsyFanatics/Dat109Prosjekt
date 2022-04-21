@@ -184,6 +184,8 @@ public class Poengtabell {
 		}
 		if (toPar) {
 			settInn(9, spillerNr, sum);
+		}else {
+			settInn(9, spillerNr, 0);
 		}
 	}
 

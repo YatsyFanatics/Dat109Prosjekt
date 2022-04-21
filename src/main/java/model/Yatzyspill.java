@@ -28,6 +28,9 @@ public class Yatzyspill implements Serializable {
 	@Transient
 	private static final int ANTALLTERNINGER = 5;
 
+	@Transient
+	boolean oppdater;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int spillid;
@@ -69,6 +72,7 @@ public class Yatzyspill implements Serializable {
 		this.admin = admin;
 		this.spillere = spillere;
 		terninger = new Terning[5];
+		oppdater = false;
 
 		for (int i = 0; i < ANTALLTERNINGER; i++) {
 			terninger[i] = new Terning();
@@ -81,6 +85,7 @@ public class Yatzyspill implements Serializable {
 		spillerSinTur = 0;
 		poengtabell = new Poengtabell();
 		terninger = new Terning[5];
+		oppdater = false;
 
 		for (int i = 0; i < ANTALLTERNINGER; i++) {
 			terninger[i] = new Terning();
@@ -93,8 +98,7 @@ public class Yatzyspill implements Serializable {
 	public Yatzyspill() {
 	}
 
-	public boolean spillTur(String command, boolean[] terningTilstand) {
-		boolean oppdater = false;
+	public void spillTur(String command, boolean[] terningTilstand) {
 
 		if (command.equalsIgnoreCase("trill") && antallKast < 3 && antallKast > 0) {
 			oppdaterTerninger(terningTilstand);
@@ -119,7 +123,6 @@ public class Yatzyspill implements Serializable {
 //					System.out.print(ro.toString());
 //					rundeDAO.nyRundeOversikt(ro);
 //					poengtabell.persistRad(spillid, rundeNr);
-					oppdater = true;
 				}
 
 			}
@@ -131,7 +134,6 @@ public class Yatzyspill implements Serializable {
 
 			terningKast();
 		}
-		return oppdater;
 	}
 
 	public void resetTerninger() {
@@ -153,9 +155,12 @@ public class Yatzyspill implements Serializable {
 	}
 
 	private void nesteRunde() {
+
 		if (spillerSinTur == 0) {
 			forrigeRunde = rundeNr;
 			rundeNr++;
+			oppdater = true;
+
 		}
 
 		if (rundeNr == 6) {
@@ -207,9 +212,11 @@ public class Yatzyspill implements Serializable {
 		vinner = spillere[0];
 
 		for (int i = 1; i < totalScore.length; i++) {
-			if (totalScore[i] > vinnerScore) {
-				vinnerScore = totalScore[i];
-				vinner = spillere[i];
+			if (totalScore[i] != null) {
+				if (totalScore[i] > vinnerScore) {
+					vinnerScore = totalScore[i];
+					vinner = spillere[i];
+				}
 			}
 		}
 	}
@@ -324,5 +331,13 @@ public class Yatzyspill implements Serializable {
 
 	public void setForrigeRunde(int forrigeRunde) {
 		this.forrigeRunde = forrigeRunde;
+	}
+
+	public boolean isOppdater() {
+		return oppdater;
+	}
+
+	public void setOppdater(boolean oppdater) {
+		this.oppdater = oppdater;
 	}
 }
